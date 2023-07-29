@@ -34,6 +34,23 @@ class Pregnancy extends Model
         'nyeri_bak' => 'boolean',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($pregnancy) {
+            if (!$pregnancy->hamil) {
+                $pregnancy->usia_kehamilan = null;
+                $pregnancy->muntah = false;
+                $pregnancy->janin_pasif = false;
+                $pregnancy->pendarahan = false;
+                $pregnancy->bengkak = false;
+                $pregnancy->sembelit = false;
+                $pregnancy->nyeri_bak = false;
+            }
+        });
+    }
+
     public function profile()
     {
         return $this->belongsTo(Profile::class);
@@ -42,5 +59,10 @@ class Pregnancy extends Model
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function report()
+    {
+        return $this->hasOne(Report::class);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +30,14 @@ Route::group([
 
     Route::group([ 'prefix' => 'user',], function () {
         Route::get('/profile', [AuthController::class, 'profile']);
+    });
+
+    Route::group([ 'prefix' => 'report' ], function () {
+        Route::post('/', [ReportController::class, 'store']);
+        Route::get('/', [ReportController::class, 'index']);
+        Route::get('/{id}', [ReportController::class, 'show']);
+        Route::put('/{id}', [ReportController::class, 'update']);
+        Route::delete('/{id}', [ReportController::class, 'destroy']);
     });
 
 });

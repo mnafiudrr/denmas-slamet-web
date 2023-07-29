@@ -27,4 +27,19 @@ class Profile extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function health()
+    {
+        return $this->hasMany(Health::class);
+    }
+
+    public function pregnancy()
+    {
+        return $this->hasMany(Pregnancy::class);
+    }
+
+    public function report()
+    {
+        return $this->hasMany(Report::class);
+    }
 }

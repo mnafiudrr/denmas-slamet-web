@@ -52,4 +52,28 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    /**
+     * Get the healths associated with the user.
+     */
+    public function healths()
+    {
+        return $this->hasMany(Health::class, 'created_by');
+    }
+
+    /**
+     * Get the pregnancies associated with the user.
+     */
+    public function pregnancies()
+    {
+        return $this->hasMany(Pregnancy::class, 'created_by');
+    }
+
+    /**
+     * Get the reports associated with the user.
+     */
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'created_by');
+    }
 }

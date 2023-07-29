@@ -37,4 +37,9 @@ class Report extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function result()
+    {
+        return $this->hasOne(Result::class);
+    }
 }
