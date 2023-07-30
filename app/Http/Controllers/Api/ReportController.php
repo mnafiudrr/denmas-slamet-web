@@ -17,14 +17,16 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        if (auth()->user()->is_admin)
-            $reports = Report::with(['profile', 'health', 'pregnancy', 'result'])
-                ->orderBy('created_at', 'desc')
-                ->get();
-        else 
-            $reports = auth()->user()->profile->report;
+        $query = Report::query()->with(['profile', 'health', 'pregnancy', 'result'])->orderBy('created_at', 'desc');
 
-        $reports = $reports->map(function ($report) {
+        if (auth()->user()->is_admin){
+            if ($request->has('profile_id'))
+                $query->where('profile_id', $request->profile_id);
+        } else {
+            $query->where('profile_id', auth()->user()->profile->id);
+        }
+
+        $reports = $query->get()->map(function ($report) {
             $report->name = $report->profile->fullname;
             return [
                 'id' => $report->id,
@@ -141,14 +143,22 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        $report = Report::with(['profile', 'health', 'pregnancy', 'result'])
-            ->findOrFail($id)
-            ->makeHidden([
-                'profile_id',
-                'health_id',
-                'pregnancy_id',
-                'created_by',
-            ]);
+        $query = Report::with(['profile', 'health', 'pregnancy', 'result'])->where('id', $id);
+        if (!auth()->user()->is_admin)
+            $query->where('profile_id', auth()->user()->profile->id);
+            
+        $report = $query->first();
+        if (!$report)
+            return response()->json([
+                'message' => 'Data tidak ditemukan',
+            ], 404);
+
+        $report = $report->makeHidden([
+                        'profile_id',
+                        'health_id',
+                        'pregnancy_id',
+                        'created_by',
+                    ]);
         
         $report->profile->makeHidden([
             'user_id',

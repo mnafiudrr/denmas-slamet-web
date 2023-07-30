@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ReportController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,4 +41,9 @@ Route::group([
         Route::delete('/{id}', [ReportController::class, 'destroy']);
     });
 
+    Route::group([ 'prefix' => 'profile' ], function () {
+        Route::get('/', [ProfileController::class, 'index']);
+        Route::get('/{id}', [ProfileController::class, 'show']);
+        Route::put('/{id}', [ProfileController::class, 'update']);
+    });
 });

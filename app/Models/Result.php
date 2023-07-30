@@ -48,12 +48,13 @@ class Result extends Model
     {
         $report = Report::find($report_id);
         $health = $report->health;
+        $pregnancy = $report->pregnancy;
 
         $imt = $this->countImt($health->berat_badan, $health->tinggi_badan);
         $status_imt = $this->getStatusImt($imt);
         $status_tekanan_darah = $this->getStatusTekananDarah($health->tekanan_darah_sistol, $health->tekanan_darah_diastol);
         $status_gula = $this->getStatusGula($health->kadar_gula);
-        $status_hb = $this->getStatusHb($health->kadar_hb);
+        $status_hb = $this->getStatusHb($health->kadar_hb, $pregnancy->hamil);
         $status_kolesterol = $this->getStatusKolesterol($health->kadar_kolesterol);
         $status_asam_urat = $this->getStatusAsamUrat($health->kadar_asam_urat);
 
@@ -116,28 +117,28 @@ class Result extends Model
     private function getStatusGula($kadar_gula)
     {
         if ($kadar_gula < 70) {
-            return 'Normal';
+            return 'Rendah';
         } elseif ($kadar_gula >= 70 && $kadar_gula <= 200) {
-            return 'Pra - diabetes';
+            return 'Normal';
         } elseif ($kadar_gula > 200) {
-            return 'Diabetes';
+            return 'Tinggi';
         } else {
             return 'Data tidak valid';
         }
     }
 
-    private function getStatusHb($kadar_hb)
+    private function getStatusHb($kadar_hb, $hamil)
     {
-        if ($kadar_hb < 7) {
-            return "Sangat Rendah";
-        } elseif ($kadar_hb >= 7 && $kadar_hb <= 8) {
-            return "Rendah";
-        } elseif ($kadar_hb > 8 && $kadar_hb <= 11) {
-            return "Normal";
-        } elseif ($kadar_hb > 11 && $kadar_hb <= 16) {
-            return "Tinggi";
+        $hb_normal = $hamil ? 11 : 12;
+        
+        if ($kadar_hb < $hb_normal) {
+            return 'Rendah';
+        } elseif ($kadar_hb == $hb_normal) {
+            return 'Normal';
+        } elseif ($kadar_hb > $hb_normal) {
+            return 'Tinggi';
         } else {
-            return "Sangat Tinggi";
+            return 'Data tidak valid';
         }
     }
 

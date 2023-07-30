@@ -21,9 +21,9 @@ class AuthController extends Controller
             'username' => 'required|string|unique:users',
             'phone' => 'required|string|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'address' => 'required|string',
-            'birthplace' => 'required|string',
-            'birthday' => 'required|date',
+            'address' => 'string',
+            'birthplace' => 'string',
+            'birthday' => 'date',
         ]);
 
         if ($validator->fails()) {
@@ -112,5 +112,57 @@ class AuthController extends Controller
             'message' => 'User profile',
             'user' => $request->user(),
         ], 200);
+    }
+
+    /**
+     * Update user profile
+     */
+    public function updateProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'fullname' => 'required|string',
+            'phone' => 'required|string',
+            'address' => 'string',
+            'birthplace' => 'string',
+            'birthday' => 'date',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        DB::beginTransaction();
+        try {
+
+            $user = $request->user();
+            $user->name = $request->fullname;
+            $user->phone = $request->phone;
+            $user->save();
+
+            $user->profile()->update([
+                'fullname' => $request->fullname,
+                'address' => $request->address,
+                'birthplace' => $request->birthplace,
+                'birthday' => $request->birthday,
+            ]);
+
+            DB::commit();
+            return response()->json([
+                'message' => 'User profile updated successfully',
+                'user' => $user,
+            ], 200);
+            
+        } catch (\Throwable $th) {
+
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Failed to update user profile',
+                'errors' => $th->getMessage(),
+            ], 500);
+
+        }
     }
 }
