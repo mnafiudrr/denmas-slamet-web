@@ -19,7 +19,7 @@ class ReportController extends Controller
     {
         $query = Report::query()->with(['profile', 'health', 'pregnancy', 'result'])->orderBy('created_at', 'desc');
 
-        if (auth()->user()->is_admin){
+        if (auth()->user()->is_admin) {
             if ($request->has('profile_id'))
                 $query->where('profile_id', $request->profile_id);
         } else {
@@ -114,21 +114,48 @@ class ReportController extends Controller
 
             DB::commit();
 
+
+            $report = $report->makeHidden([
+                'profile_id',
+                'health_id',
+                'pregnancy_id',
+                'created_by',
+            ]);
+
+            $report->profile->makeHidden([
+                'user_id',
+                'created_at',
+                'updated_at',
+                'created_by',
+            ]);
+
+            $report->health->makeHidden([
+                'id',
+                'profile_id',
+                'created_by',
+                'created_at',
+                'updated_at',
+            ]);
+
+            $report->pregnancy->makeHidden([
+                'id',
+                'profile_id',
+                'created_by',
+                'created_at',
+                'updated_at',
+            ]);
+
+            $report->result->makeHidden([
+                'id',
+                'report_id',
+                'created_at',
+                'updated_at',
+            ]);
+
             return response()->json([
                 'message' => 'Berhasil menambahkan laporan',
-                'data' => [
-                    'report' => $report->makeHidden([
-                        'profile_id',
-                        'health_id',
-                        'pregnancy_id',
-                        'created_by',
-                    ]),
-                    'health' => $health,
-                    'pregnancy' => $pregnancy,
-                    'result' => $result,
-                ],
+                'data' => $report,
             ], 201);
-
         } catch (\Throwable $th) {
             DB::rollback();
             return response()->json([
@@ -146,7 +173,7 @@ class ReportController extends Controller
         $query = Report::with(['profile', 'health', 'pregnancy', 'result'])->where('id', $id);
         if (!auth()->user()->is_admin)
             $query->where('profile_id', auth()->user()->profile->id);
-            
+
         $report = $query->first();
         if (!$report)
             return response()->json([
@@ -154,12 +181,12 @@ class ReportController extends Controller
             ], 404);
 
         $report = $report->makeHidden([
-                        'profile_id',
-                        'health_id',
-                        'pregnancy_id',
-                        'created_by',
-                    ]);
-        
+            'profile_id',
+            'health_id',
+            'pregnancy_id',
+            'created_by',
+        ]);
+
         $report->profile->makeHidden([
             'user_id',
             'created_at',
