@@ -85,7 +85,15 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Login successful',
-            'user' => $user,
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'username' => $user->username,
+                'phone' => $user->phone,
+                'is_admin' => $user->is_admin,
+                'profile_id' => $user->profile->id,
+                'fullname' => $user->profile->fullname,
+            ],
             'token' => $token,
         ], 200);
 
@@ -110,7 +118,15 @@ class AuthController extends Controller
     {
         return response()->json([
             'message' => 'User profile',
-            'user' => $request->user(),
+            'user' => [
+                'id' => $request->user()->id,
+                'name' => $request->user()->name,
+                'username' => $request->user()->username,
+                'phone' => $request->user()->phone,
+                'is_admin' => $request->user()->is_admin,
+                'profile_id' => $request->user()->profile->id,
+                'fullname' => $request->user()->profile->fullname,
+            ],
         ], 200);
     }
 
