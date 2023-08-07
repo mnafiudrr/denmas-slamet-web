@@ -69,12 +69,12 @@
                     Profile
                   </a>
                 </li> --}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a class="nav-link me-2" href="{{ route('register') }}">
                     <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
                     Sign Up
                   </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                   <a class="nav-link me-2" href="{{ route('login') }}">
                     <i class="fas fa-key opacity-6 text-dark me-1"></i>
@@ -109,7 +109,7 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                  <form role="form" method="POST" action="{{ route('login.post') }}">
+                  <form role="form" method="POST" action="{{ route('login.authenticate') }}">
                     @csrf
                     <label>Username</label>
                     <div class="mb-3">
@@ -128,12 +128,12 @@
                     </div>
                   </form>
                 </div>
-                <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                {{-- <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-4 text-sm mx-auto">
                     Don't have an account?
                     <a href="{{ route('register') }}" class="text-info text-gradient font-weight-bold">Sign up</a>
                   </p>
-                </div>
+                </div> --}}
               </div>
             </div>
             <div class="col-md-6">

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,15 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('login.authenticate');
+
+Route::group(['middleware' => 'auth', ], function() {
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('root');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    
+    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
 
 Route::get('/test', function () {
     $current_date_time = Carbon\Carbon::now()->toDateTimeString();
