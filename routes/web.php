@@ -22,3 +22,8 @@ Route::get('/dashboard', function () {
 Route::get('/login', function () {
     return view('login');
 })->name('login');
+
+Route::get('/test', function () {
+    $current_date_time = Carbon\Carbon::now()->toDateTimeString();
+    return $current_date_time;
+});

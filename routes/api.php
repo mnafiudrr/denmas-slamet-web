@@ -47,3 +47,9 @@ Route::group([
         Route::put('/{id}', [ProfileController::class, 'update']);
     });
 });
+
+
+Route::get('/test', function () {
+    $current_date_time = date('Y-m-d H:i:s');
+    return $current_date_time;
+});
