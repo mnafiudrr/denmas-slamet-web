@@ -26,6 +26,7 @@ class ProfileController extends Controller
                 'birthday' => $profile->birthday,
                 'phone' => $profile->user->phone,
                 'username' => $profile->user->username,
+                'is_admin' => $profile->user->is_admin,
             ];
         });
 
@@ -58,6 +59,7 @@ class ProfileController extends Controller
                 'birthday' => $profile->birthday,
                 'phone' => $profile->user->phone,
                 'username' => $profile->user->username,
+                'is_admin' => $profile->user->is_admin,
             ],
         ]);
     }
@@ -102,6 +104,7 @@ class ProfileController extends Controller
                 'birthday' => $profile->birthday,
                 'phone' => $profile->user->phone,
                 'username' => $profile->user->username,
+                'is_admin' => $profile->user->is_admin,
             ],
         ]);
     }
