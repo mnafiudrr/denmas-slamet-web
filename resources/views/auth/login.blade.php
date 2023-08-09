@@ -18,10 +18,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/assets/img/apple-icon.png') }}">
-  <link rel="icon" type="image/png" href="{{ asset('/assets/img/favicon.png') }}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.ico') }}">
   <title>
-    Soft UI Dashboard by Creative Tim
+    Login | Denmas Slamet Admin
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -46,7 +46,7 @@
         <nav class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
           <div class="container-fluid pe-0">
             <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="{{ route('root') }}">
-              Soft UI Dashboard
+              Denmas Slamet Admin
             </a>
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon mt-2">
@@ -57,12 +57,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navigation">
               <ul class="navbar-nav mx-auto ms-xl-auto me-xl-7">
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{{ route('dashboard') }}">
                     <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
                     Dashboard
                   </a>
-                </li>
+                </li> --}}
                 {{-- <li class="nav-item">
                   <a class="nav-link me-2" href="{{ asset('/pages/profile.html') }}">
                     <i class="fa fa-user opacity-6 text-dark me-1"></i>
@@ -75,19 +75,19 @@
                     Sign Up
                   </a>
                 </li> --}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a class="nav-link me-2" href="{{ route('login') }}">
                     <i class="fas fa-key opacity-6 text-dark me-1"></i>
                     Sign In
                   </a>
-                </li>
+                </li> --}}
               </ul>
               <li class="nav-item d-flex align-items-center">
-                <a class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" target="_blank" href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard">Online Builder</a>
+                <a class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" target="_blank" href="https://github.com/mnafiudrr/denmas-slamet-mobile">Mobile App Project</a>
               </li>
               <ul class="navbar-nav d-lg-block d-none">
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/product/soft-ui-dashboard" class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Free download</a>
+                  <a href="https://drive.google.com/file/d/1G3MMkMw8ILWcEEn4COOWAmGkx2NJqQcP/view?usp=sharing" target="_blank" class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Mobile App Download</a>
                 </li>
               </ul>
             </div>
@@ -106,7 +106,7 @@
               <div class="card card-plain mt-8">
                 <div class="card-header pb-0 text-left bg-transparent">
                   <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
-                  <p class="mb-0">Enter your email and password to sign in</p>
+                  <p class="mb-0">Enter your username and password to sign in</p>
                 </div>
                 <div class="card-body">
                   <form role="form" method="POST" action="{{ route('login.authenticate') }}">
@@ -119,26 +119,29 @@
                     <div class="mb-3">
                       <input type="password" class="form-control" name="password" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
                     </div>
-                    <div class="form-check form-switch">
+                    {{-- <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
                       <label class="form-check-label" for="rememberMe">Remember me</label>
-                    </div>
+                    </div> --}}
                     <div class="text-center">
                       <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
                     </div>
                   </form>
                 </div>
-                {{-- <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                  <p class="mb-4 text-sm mx-auto">
-                    Don't have an account?
-                    <a href="{{ route('register') }}" class="text-info text-gradient font-weight-bold">Sign up</a>
+                <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                  <p class="mb-4 text-sm mx-auto text-danger">
+                    @if (session('error'))
+                        {{ session('error') }}
+                    @endif
+                    {{-- <a href="" class="text-info text-gradient font-weight-bold">Sign up</a> --}}
                   </p>
-                </div> --}}
+                </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('{{ asset('/assets/img/curved-images/curved6.jpg') }}')"></div>
+                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('{{ asset('/assets/img/kesmas.jpg') }}')"></div>
+                {{-- <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('{{ asset('/assets/img/curved-images/curved6.jpg') }}')"></div> --}}
               </div>
             </div>
           </div>
@@ -151,7 +154,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mb-4 mx-auto text-center">
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+          {{-- <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
             Company
           </a>
           <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
@@ -168,10 +171,10 @@
           </a>
           <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
             Pricing
-          </a>
+          </a> --}}
         </div>
         <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
+          {{-- <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
             <span class="text-lg fab fa-dribbble"></span>
           </a>
           <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
@@ -185,7 +188,7 @@
           </a>
           <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
             <span class="text-lg fab fa-github"></span>
-          </a>
+          </a> --}}
         </div>
       </div>
       <div class="row">
@@ -193,7 +196,7 @@
           <p class="mb-0 text-secondary">
             Copyright © <script>
               document.write(new Date().getFullYear())
-            </script> Soft by Creative Tim.
+            </script> Soft by Yuruu Project.
           </p>
         </div>
       </div>

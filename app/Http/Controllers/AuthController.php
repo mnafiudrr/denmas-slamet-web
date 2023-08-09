@@ -22,12 +22,18 @@ class AuthController extends Controller
         
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
+            if (!auth()->user()->is_admin){
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return back()->with('error', 'Only admin can login.');
+            }
+
             return redirect()->intended('dashboard');
         }
         
-        return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-        ]);
+        return back()->with('error', 'The provided credentials do not match our records.');
     }
 
     public function logout(Request $request)
