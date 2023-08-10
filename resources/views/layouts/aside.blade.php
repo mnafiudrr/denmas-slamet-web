@@ -120,6 +120,6 @@
             </div>
         </div>
         <a class="btn bg-gradient-primary mt-3 w-100"
-            href="https://github.com/mnafiudrr">Github</a>
+            href="https://github.com/mnafiudrr/denmas-slamet-web">Github</a>
     </div>
 </aside>
