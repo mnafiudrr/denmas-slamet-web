@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', $user->profile->fullname)
+@section('title', 'Laporan')
 
 @section('content')
 
@@ -8,13 +8,13 @@
   <div class="col-12">
     <div class="card mb-4">
       <div class="card-header pb-0">
-        {{-- <h6>All Users</h6> --}}
-        <ul class="list-group">
+        <h6>Laporan</h6>
+        {{-- <ul class="list-group">
           <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; {{ $user->profile->fullname }}</li>
           <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; {{ $user->phone }}</li>
           <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Alamat:</strong> &nbsp; {{ $user->profile->address }}</li>
           <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tempat, Tanggal Lahir:</strong> &nbsp; {{ $user->profile->birthplace.', '.date('d-m-Y', strtotime($user->profile->birthday)) }}</li>
-        </ul>
+        </ul> --}}
       </div>
       <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-3">
@@ -22,6 +22,7 @@
             <thead>
               <tr>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kehamilan</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">IMT</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tekanan Darah</th>
@@ -33,7 +34,7 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($user->reports as $report)
+              @foreach ($reports as $report)
               @php
                 $result = $report->result;
               @endphp
@@ -46,8 +47,10 @@
                   </div>
                 </td>
                 <td class="align-middle text-center text-sm">
+                  <h6 class="mb-0 text-sm">{{ $report->profile->fullname }}</h6>
+                </td>
+                <td class="align-middle text-center text-sm">
                   <span class="badge badge-sm bg-gradient-{{ $report->pregnancy->hamil ? 'primary' : 'secondary' }}">{{ $report->pregnancy->hamil? 'hamil' : 'tidak hamil' }}</span>
-
                 </td>
                 <td class="align-middle text-center text-sm">
                   <h6 class="mb-0 text-sm">{{ $result->imt }}</h6>
@@ -109,18 +112,6 @@
       "drawCallback": function() {
       }
     });
-
-    // var paginationHTML = '<ul class="pagination"><li class="page-item"><a class="page-link" href="javascript:;" aria-label="Previous"><i class="fa fa-angle-left"></i><span class="sr-only">Previous</span></a></li>';
-    // var info = table.page.info();
-    
-    // for (var i = 1; i <= info.pages; i++) {
-    //   var active = (i === info.page + 1) ? 'active' : '';
-    //   paginationHTML += '<li class="page-item ' + active + '"><a class="page-link" aria-controls="DataTables_Table_0" role="link" data-dt-idx="' + (i-1) + '" tabindex="0">' + i + '</a></li>';
-    // }
-    
-    // paginationHTML += '<li class="page-item"><a class="page-link" href="javascript:;" aria-label="Next"><i class="fa fa-angle-right"></i><span class="sr-only">Next</span></a></li></ul>';
-
-    // $('.dataTables_paginate').html(paginationHTML);
   });
 
 </script>

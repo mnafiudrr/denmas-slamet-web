@@ -1,12 +1,12 @@
 
 <div class="fixed-plugin">
-  <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+  {{-- <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
     <i class="fa fa-cog py-2"> </i>
-  </a>
+  </a> --}}
   <div class="card shadow-lg ">
     <div class="card-header pb-0 pt-3 ">
       <div class="float-start">
-        <h5 class="mt-3 mb-0">Soft UI Configurator</h5>
+        <h5 class="mt-3 mb-0">Configurator</h5>
         <p>See our dashboard options.</p>
       </div>
       <div class="float-end mt-4">
@@ -43,7 +43,7 @@
       </div>
       <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
       <!-- Navbar Fixed -->
-      <div class="mt-3">
+      {{-- <div class="mt-3">
         <h6 class="mb-0">Navbar Fixed</h6>
       </div>
       <div class="form-check form-switch ps-0">
@@ -61,7 +61,7 @@
         <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/soft-ui-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
           <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
         </a>
-      </div>
+      </div> --}}
     </div>
   </div>
 </div>
