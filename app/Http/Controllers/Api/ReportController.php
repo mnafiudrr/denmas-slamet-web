@@ -153,6 +153,52 @@ class ReportController extends Controller
                 'updated_at',
             ]);
 
+            $query = ResultConfig::query();
+
+            // IMT
+            $query->where(function ($query) use ($report) {
+                $query->where('name', $report->result->status_imt)
+                    ->where('type', 'imt');
+            });
+
+            // Tekanan Darah
+            $query->orWhere(function ($query) use ($report) {
+                $query->where('name', $report->result->status_tekanan_darah)
+                    ->where('type', 'tekanan_darah');
+            });
+
+            // Kadar Gula
+            $query->orWhere(function ($query) use ($report) {
+                $query->where('name', $report->result->status_gula)
+                    ->where('type', 'gula');
+            });
+
+            // Kadar HB
+            $query->orWhere(function ($query) use ($report) {
+                $query->where('name', $report->result->status_hb)
+                    ->where('type', 'hb');
+            });
+
+            // Kadar Kolesterol
+            $query->orWhere(function ($query) use ($report) {
+                $query->where('name', $report->result->status_kolesterol)
+                    ->where('type', 'kolesterol');
+            });
+
+            // Kadar Asam Urat
+            $query->orWhere(function ($query) use ($report) {
+                $query->where('name', $report->result->status_asam_urat)
+                    ->where('type', 'asam_urat');
+            });
+
+            $report->result->status = $query->get()->map(function ($item) {
+                return [
+                    'type' => $item->type,
+                    'name' => $item->name,
+                    'description' => $item->description,
+                ];
+            });
+
             return response()->json([
                 'message' => 'Berhasil menambahkan laporan',
                 'data' => $report,
@@ -223,37 +269,37 @@ class ReportController extends Controller
         // IMT
         $query->where(function ($query) use ($report) {
             $query->where('name', $report->result->status_imt)
-                  ->where('type', 'imt');
+                ->where('type', 'imt');
         });
 
         // Tekanan Darah
         $query->orWhere(function ($query) use ($report) {
             $query->where('name', $report->result->status_tekanan_darah)
-                  ->where('type', 'tekanan_darah');
+                ->where('type', 'tekanan_darah');
         });
 
         // Kadar Gula
         $query->orWhere(function ($query) use ($report) {
             $query->where('name', $report->result->status_gula)
-                  ->where('type', 'gula');
+                ->where('type', 'gula');
         });
 
         // Kadar HB
         $query->orWhere(function ($query) use ($report) {
             $query->where('name', $report->result->status_hb)
-                  ->where('type', 'hb');
+                ->where('type', 'hb');
         });
 
         // Kadar Kolesterol
         $query->orWhere(function ($query) use ($report) {
             $query->where('name', $report->result->status_kolesterol)
-                  ->where('type', 'kolesterol');
+                ->where('type', 'kolesterol');
         });
 
         // Kadar Asam Urat
         $query->orWhere(function ($query) use ($report) {
             $query->where('name', $report->result->status_asam_urat)
-                  ->where('type', 'asam_urat');
+                ->where('type', 'asam_urat');
         });
 
         $report->result->status = $query->get()->map(function ($item) {
@@ -263,8 +309,6 @@ class ReportController extends Controller
                 'description' => $item->description,
             ];
         });
-
-        // dd($report);
 
         return response()->json([
             'status' => 'success',
