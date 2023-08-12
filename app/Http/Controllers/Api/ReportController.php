@@ -7,6 +7,7 @@ use App\Models\Health;
 use App\Models\Pregnancy;
 use App\Models\Report;
 use App\Models\Result;
+use App\Models\ResultConfig;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -216,6 +217,54 @@ class ReportController extends Controller
             'created_at',
             'updated_at',
         ]);
+
+        $query = ResultConfig::query();
+
+        // IMT
+        $query->where(function ($query) use ($report) {
+            $query->where('name', $report->result->status_imt)
+                  ->where('type', 'imt');
+        });
+
+        // Tekanan Darah
+        $query->orWhere(function ($query) use ($report) {
+            $query->where('name', $report->result->status_tekanan_darah)
+                  ->where('type', 'tekanan_darah');
+        });
+
+        // Kadar Gula
+        $query->orWhere(function ($query) use ($report) {
+            $query->where('name', $report->result->status_gula)
+                  ->where('type', 'gula');
+        });
+
+        // Kadar HB
+        $query->orWhere(function ($query) use ($report) {
+            $query->where('name', $report->result->status_hb)
+                  ->where('type', 'hb');
+        });
+
+        // Kadar Kolesterol
+        $query->orWhere(function ($query) use ($report) {
+            $query->where('name', $report->result->status_kolesterol)
+                  ->where('type', 'kolesterol');
+        });
+
+        // Kadar Asam Urat
+        $query->orWhere(function ($query) use ($report) {
+            $query->where('name', $report->result->status_asam_urat)
+                  ->where('type', 'asam_urat');
+        });
+
+        $report->result->status = $query->get()->map(function ($item) {
+            return [
+                'type' => $item->type,
+                'name' => $item->name,
+                'description' => $item->description,
+            ];
+        });
+
+        // dd($report);
 
         return response()->json([
             'status' => 'success',

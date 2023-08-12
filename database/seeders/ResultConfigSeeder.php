@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ResultConfig;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,21 +14,21 @@ class ResultConfigSeeder extends Seeder
             'description' => 'Sebaiknya Anda menambah berat badan',
             'type' => 'imt',
             'min' => 0,
-            'max' => 18.4,
+            'max' => 19,
         ],
         [
             'name' => 'Normal',
             'description' => 'Sebaiknya Anda menjaga berat badan Anda',
             'type' => 'imt',
-            'min' => 18.5,
-            'max' => 24.9,
+            'min' => 19,
+            'max' => 25,
         ],
         [
             'name' => 'Gemuk',
             'description' => 'Sebaiknya Anda mengurangi berat badan Anda',
             'type' => 'imt',
             'min' => 25,
-            'max' => 29.9,
+            'max' => 30,
         ],
         [
             'name' => 'Obesitas',
@@ -189,6 +190,9 @@ class ResultConfigSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+    	collect($this->data)
+        ->map(function (array $item) {
+            ResultConfig::updateOrCreate($item);
+        });
     }
 }

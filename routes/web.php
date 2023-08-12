@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ResultConfigController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,9 @@ Route::group(['middleware' => 'auth', ], function() {
 
     Route::get('/report', [ReportController::class, 'index'])->name('report.index');
     Route::get('/report/{encryptedId}', [ReportController::class, 'show'])->name('report.show');
+
+    Route::get('/result-config', [ResultConfigController::class, 'index'])->name('result-config.index');
+    Route::put('/result-config', [ResultConfigController::class, 'update'])->name('result-config.update');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
