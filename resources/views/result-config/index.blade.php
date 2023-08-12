@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Result Config')
+@section('title', 'Status Informasi')
 
 @section('content')
 <form action="" method="POST">
@@ -12,7 +12,10 @@
                 <div class="card-header pb-0">
                     <div class="row">
                         <div class="col-md-6">
-                            <h6>Result Config</h6>
+                            <h6>Status Informasi</h6>
+                            <p>
+                                Untuk menampilkan informasi status pada halaman hasil di aplikasi mobile, silahkan isi form di bawah ini.
+                            </p>
                         </div>
                         <div class="col-md-6 text-end">
                             <button type="submit" class="btn bg-gradient-primary">
