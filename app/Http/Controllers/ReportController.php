@@ -10,14 +10,28 @@ class ReportController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $reports = Report::with(['profile', 'health', 'pregnancy', 'createdBy', 'result'])
-        ->orderBy('created_at', 'desc')
-        ->get();
+        ->orderBy('created_at', 'desc');
 
-        return view('report.index', compact('reports'));
+        if ($request->has('week') && $request->query('week')) {
+            $dateString = $request->query('week');
+            $year = intval(substr($dateString, 0, 4));
+            $week = intval(substr($dateString, 6));
+            
+            $startDate = new \DateTime();
+            $startDate->setISODate($year, $week);
+            $endDate = clone $startDate;
+            $endDate->modify('+7 days');
+
+            $reports->whereBetween('created_at', [$startDate, $endDate]);
+        }
+
+        $reports = $reports->get();
+
+        return view('report.index', compact('reports', 'request'));
     }
 
     /**
@@ -39,9 +53,15 @@ class ReportController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $encryptedId)
     {
-        //
+        try {
+            $id = decrypt($encryptedId);
+            $report = Report::with(['profile', 'health', 'pregnancy', 'createdBy', 'result'])->findOrFail($id);
+            return view('report.show', compact('report'));
+        } catch (\Throwable $th) {
+            return redirect()->route('report.index')->with('error', 'Data tidak ditemukan.');
+        }
     }
 
     /**

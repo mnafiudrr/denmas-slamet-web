@@ -66,4 +66,13 @@ class UserController extends Controller
     {
         //
     }
+
+    public function adminStatus(Request $request, string $username)
+    {
+        $user = User::where('username', $username)->firstOrFail();
+        $user->is_admin = $request->input('is_admin');
+        $user->save();
+
+        return redirect()->back();
+    }
 }

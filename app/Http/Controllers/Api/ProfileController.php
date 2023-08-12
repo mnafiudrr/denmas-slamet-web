@@ -24,6 +24,8 @@ class ProfileController extends Controller
                 'address' => $profile->address,
                 'birthplace' => $profile->birthplace,
                 'birthday' => $profile->birthday,
+                'riwayat_kesehatan_dahulu' => $profile->riwayat_kesehatan_dahulu,
+                'riwayat_kesehatan_keluarga' => $profile->riwayat_kesehatan_keluarga,
                 'phone' => $profile->user->phone,
                 'username' => $profile->user->username,
                 'is_admin' => $profile->user->is_admin,
@@ -58,6 +60,8 @@ class ProfileController extends Controller
                 'birthplace' => $profile->birthplace,
                 'birthday' => $profile->birthday,
                 'phone' => $profile->user->phone,
+                'riwayat_kesehatan_dahulu' => $profile->riwayat_kesehatan_dahulu,
+                'riwayat_kesehatan_keluarga' => $profile->riwayat_kesehatan_keluarga,
                 'username' => $profile->user->username,
                 'is_admin' => $profile->user->is_admin,
             ],
@@ -80,8 +84,8 @@ class ProfileController extends Controller
             'address' => 'required|string',
             'birthplace' => 'required|string',
             'birthday' => 'required|date',
-            // 'phone' => 'required|string',
-            // 'username' => 'required|string',
+            'riwayat_kesehatan_dahulu' => 'string',
+            'riwayat_kesehatan_keluarga' => 'string',
         ]);
 
         $profile = Profile::query()->findOrFail($profile_id);
@@ -102,6 +106,8 @@ class ProfileController extends Controller
                 'address' => $profile->address,
                 'birthplace' => $profile->birthplace,
                 'birthday' => $profile->birthday,
+                'riwayat_kesehatan_dahulu' => $profile->riwayat_kesehatan_dahulu,
+                'riwayat_kesehatan_keluarga' => $profile->riwayat_kesehatan_keluarga,
                 'phone' => $profile->user->phone,
                 'username' => $profile->user->username,
                 'is_admin' => $profile->user->is_admin,

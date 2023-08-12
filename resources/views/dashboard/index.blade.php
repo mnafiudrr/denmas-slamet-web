@@ -266,4 +266,12 @@
     // return result.slice(startMonth - 1, endMonth);
   }
 </script>
+
+<script>
+  $(document).ready(function() {
+    $('#laporan-mingguan').click(function() {
+      $('#form-mingguan').submit();
+    });
+  });
+</script>
 @endsection

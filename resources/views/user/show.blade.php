@@ -7,14 +7,22 @@
 <div class="row">
   <div class="col-12">
     <div class="card mb-4">
-      <div class="card-header pb-0">
-        {{-- <h6>All Users</h6> --}}
-        <ul class="list-group">
+      <div class="card-header pb-0 row">
+        <ul class="list-group col-md-6">
           <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; {{ $user->profile->fullname }}</li>
           <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; {{ $user->phone }}</li>
           <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Alamat:</strong> &nbsp; {{ $user->profile->address }}</li>
           <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tempat, Tanggal Lahir:</strong> &nbsp; {{ $user->profile->birthplace.', '.date('d-m-Y', strtotime($user->profile->birthday)) }}</li>
         </ul>
+        <div class="col-md-6 text-end">
+          @if (auth()->user()->id != $user->id || $user->name != 'administrator')
+            @if (!$user->is_admin) 
+              <button type="button" class="btn btn-block bg-gradient-warning mb-3" data-bs-toggle="modal" data-bs-target="#modal-to-admin">Jadikan Admin</button>
+            @else
+              <button type="button" class="btn btn-block bg-gradient-danger mb-3" data-bs-toggle="modal" data-bs-target="#modal-to-admin">Jadikan Pengguna</button>
+            @endif
+          @endif
+        </div>
       </div>
       <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-3">
@@ -39,15 +47,16 @@
               @endphp
               <tr>
                 <td class="align-middle text-center text-sm">
+                  <p style="display: none">{{ date('Y-m-d h:i:s', strtotime($report->created_at)) }}</p>
                   <div class="d-flex px-2 py-1">
                     <div class="d-flex flex-column justify-content-center">
                       <h6 class="mb-0 text-sm">{{ date('d-m-Y', strtotime($report->created_at)) }}</h6>
+                      <p class="text-xs text-secondary mb-0">{{ date('h:i:s', strtotime($report->created_at)) }}</p>
                     </div>
                   </div>
                 </td>
                 <td class="align-middle text-center text-sm">
                   <span class="badge badge-sm bg-gradient-{{ $report->pregnancy->hamil ? 'primary' : 'secondary' }}">{{ $report->pregnancy->hamil? 'hamil' : 'tidak hamil' }}</span>
-
                 </td>
                 <td class="align-middle text-center text-sm">
                   <h6 class="mb-0 text-sm">{{ $result->imt }}</h6>
@@ -69,7 +78,7 @@
                   <span class="badge badge-sm bg-gradient-{{ $result->status_asam_urat == 'Normal' ? 'success' : ($result->status_asam_urat == 'Rendah' ? 'warning' : 'danger') }}">{{ $result->status_asam_urat }}</span>
                 </td>
                 <td class="align-middle">
-                  <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                  <a href="{{ route('report.show', encrypt($result->report->id)) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                     Detail
                   </a>
                 </td>
@@ -82,6 +91,48 @@
     </div>
   </div>
 </div>
+
+@if (auth()->user()->id != $user->id || $user->name != 'administrator')
+  <div class="modal fade" id="modal-to-admin" tabindex="-1" role="dialog" aria-labelledby="modal-to-admin" aria-hidden="true">
+    <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          @if (!$user->is_admin)
+            <h6 class="modal-title" id="modal-title-to-admin">Pengguna ini akan dijadikan admin</h6>
+          @else
+            <h6 class="modal-title" id="modal-title-to-admin">Pengguna ini akan dijadikan pengguna biasa</h6>
+          @endif
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="py-3 text-center">
+            <i class="ni ni-bell-55 ni-3x"></i>
+            <h4 class="text-gradient text-danger mt-4">Apakah anda yakin?</h4>
+            @if (!$user->is_admin)
+              <p>Menjadikan pengguna ini sebagai admin akan membuat pengguna dapat melihat data pengguna lain dan dapat mengakses hak-hak admin baik pada aplikasi dan di web admin ini</p>
+            @else
+              <p>Menjadikan pengguna ini sebagai pengguna biasa akan membuat pengguna tidak dapat melihat data pengguna lain dan tidak dapat mengakses hak-hak admin baik pada aplikasi dan di web admin ini</p>
+            @endif
+          </div>
+        </div>
+        <form action="{{ route('user.admin-status', $user->username) }}" method="post">
+          @csrf
+          <div class="modal-footer">
+            @if (!$user->is_admin)
+              <input type="hidden" name="is_admin" value="1">
+            @else
+              <input type="hidden" name="is_admin" value="0">
+            @endif
+            <button type="submit" class="btn btn-secondary">Ok, Yakin</button>
+            <button type="button" class="btn btn-link text-primary ml-auto" data-bs-dismiss="modal">Tutup</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+@endif
   
 @endsection
 

@@ -1,7 +1,7 @@
 
 <div class="row">
   <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-    <div class="card">
+    <div class="card" id="laporan-mingguan">
       <div class="card-body p-3">
         <div class="row">
           <div class="col-8">
@@ -10,6 +10,10 @@
               <h5 class="font-weight-bolder mb-0">
                 {{ $weeklyReportCount }}
                 {{-- <span class="text-success text-sm font-weight-bolder">+55%</span> --}}
+                <form action="{{ route('report.index') }}" method="get" style="display: none" id="form-mingguan">
+                  <input type="week" name="week" value="{{ date('Y').'-W'.date('W') }}">
+                  <button type="submit" id="submit-mingguan" class="btn btn-sm bg-gradient-primary">Lihat</button>
+                </form>
               </h5>
             </div>
           </div>

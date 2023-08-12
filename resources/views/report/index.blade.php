@@ -8,13 +8,16 @@
   <div class="col-12">
     <div class="card mb-4">
       <div class="card-header pb-0">
-        <h6>Laporan</h6>
-        {{-- <ul class="list-group">
-          <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; {{ $user->profile->fullname }}</li>
-          <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; {{ $user->phone }}</li>
-          <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Alamat:</strong> &nbsp; {{ $user->profile->address }}</li>
-          <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tempat, Tanggal Lahir:</strong> &nbsp; {{ $user->profile->birthplace.', '.date('d-m-Y', strtotime($user->profile->birthday)) }}</li>
-        </ul> --}}
+        <div class="row">
+          <div class="col-md-6">
+            <h6>Laporan</h6>
+          </div>
+          <div class="col-md-6 text-end">
+            <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#filterModal">
+              Filter
+            </button>
+          </div>
+        </div>
       </div>
       <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-3">
@@ -40,9 +43,11 @@
               @endphp
               <tr>
                 <td class="align-middle text-center text-sm">
+                  <p style="display: none">{{ date('Y-m-d h:i:s', strtotime($report->created_at)) }}</p>
                   <div class="d-flex px-2 py-1">
                     <div class="d-flex flex-column justify-content-center">
                       <h6 class="mb-0 text-sm">{{ date('d-m-Y', strtotime($report->created_at)) }}</h6>
+                      <p class="text-xs text-secondary mb-0">{{ date('h:i:s', strtotime($report->created_at)) }}</p>
                     </div>
                   </div>
                 </td>
@@ -72,7 +77,7 @@
                   <span class="badge badge-sm bg-gradient-{{ $result->status_asam_urat == 'Normal' ? 'success' : ($result->status_asam_urat == 'Rendah' ? 'warning' : 'danger') }}">{{ $result->status_asam_urat }}</span>
                 </td>
                 <td class="align-middle">
-                  <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                  <a href="{{ route('report.show', encrypt($result->report->id)) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                     Detail
                   </a>
                 </td>
@@ -86,6 +91,30 @@
   </div>
 </div>
   
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Filter</h5>
+        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="week-input" class="col-form-label">Minggu ke-</label>
+            <input class="form-control" type="week" value="{{ $request->query('week') }}" id="week-input" name="week">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn bg-gradient-primary">OK</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 @endsection
 
 

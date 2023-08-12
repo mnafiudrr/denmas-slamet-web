@@ -26,8 +26,10 @@ Route::group(['middleware' => 'auth', ], function() {
     
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::post('/user/{id}/admin-status', [UserController::class, 'adminStatus'])->name('user.admin-status');
 
     Route::get('/report', [ReportController::class, 'index'])->name('report.index');
+    Route::get('/report/{encryptedId}', [ReportController::class, 'show'])->name('report.show');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

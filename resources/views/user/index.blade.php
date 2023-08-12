@@ -20,6 +20,7 @@
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">No Hp</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alamat</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tempat Tanggal Lahir</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kehamilan</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                 <th class="text-secondary opacity-7"></th>
               </tr>
@@ -51,11 +52,18 @@
                   <p class="text-xs text-secondary mb-0">{{ date('d-m-Y', strtotime($user->profile->birthday)) }}</p>
                 </td>
                 <td class="align-middle text-center text-sm">
+                  @php
+                    $pregnancy = $user->profile->pregnancy()->orderBy('created_at', 'desc')->first();
+                  @endphp
+                  <span class="badge badge-sm bg-gradient-{{ $pregnancy && $pregnancy->hamil ? 'primary' : 'secondary' }}">{{ $pregnancy && $pregnancy->hamil ? 'hamil' : 'tidak hamil' }}</span>
+                  {{-- <span class="text-secondary text-xs font-weight-bold">{{ $user->profile->address }}</span> --}}
+                </td>
+                <td class="align-middle text-center text-sm">
                   <span class="badge badge-sm bg-gradient-{{ $user->is_admin ? 'success' : 'secondary' }}">{{ $user->is_admin ? 'Admin' : 'User' }}</span>
                 </td>
                 <td class="align-middle">
-                  <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                    Edit
+                  <a href="{{ route('user.show', $user->username) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                    Lihat
                   </a>
                 </td>
               </tr>

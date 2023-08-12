@@ -17,6 +17,8 @@ class Profile extends Model
         'address',
         'birthplace',
         'birthday',
+        'riwayat_kesehatan_dahulu',
+        'riwayat_kesehatan_keluarga',
     ];
 
     protected $casts = [
