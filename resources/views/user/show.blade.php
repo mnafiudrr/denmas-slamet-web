@@ -17,7 +17,7 @@
           <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Riwayat Kesehatan Keluarga :</strong> &nbsp; {{ $user->profile->riwayat_kesehatan_keluarga }}</li>
         </ul>
         <div class="col-md-6 text-end">
-          @if (auth()->user()->id != $user->id || $user->name != 'administrator')
+          @if (auth()->user()->id != $user->id && $user->name != 'administrator')
             @if (!$user->is_admin) 
               <button type="button" class="btn btn-block bg-gradient-warning mb-3" data-bs-toggle="modal" data-bs-target="#modal-to-admin">Jadikan Admin</button>
             @else
