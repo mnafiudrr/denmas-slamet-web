@@ -43,11 +43,11 @@
               @endphp
               <tr>
                 <td class="align-middle text-center text-sm">
-                  <p style="display: none">{{ date('Y-m-d h:i:s', strtotime($report->created_at)) }}</p>
+                  <p style="display: none">{{ date('Y-m-d H:i:s', strtotime($report->created_at)) }}</p>
                   <div class="d-flex px-2 py-1">
                     <div class="d-flex flex-column justify-content-center">
                       <h6 class="mb-0 text-sm">{{ date('d-m-Y', strtotime($report->created_at)) }}</h6>
-                      <p class="text-xs text-secondary mb-0">{{ date('h:i:s', strtotime($report->created_at)) }}</p>
+                      <p class="text-xs text-secondary mb-0">{{ date('H:i:s', strtotime($report->created_at)) }}</p>
                     </div>
                   </div>
                 </td>
@@ -124,7 +124,7 @@
 <script>
   $(document).ready(function() {
     var table = $('table').DataTable({
-      "order": [[ 0, "asc" ]],
+      "order": [[ 0, "desc" ]],
       "columnDefs": [
         { "orderable": false, "targets": 8 }
       ],
