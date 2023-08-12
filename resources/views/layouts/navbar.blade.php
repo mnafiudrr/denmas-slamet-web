@@ -56,12 +56,20 @@
                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
               </a>
             </li> --}}
-            <li class="nav-item pe-2 d-flex align-items-center">
+            <li class="nav-item d-flex align-items-center">
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" href="{{ route('user.show', auth()->user()->username) }}">{{ auth()->user()->username }}</a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a href="{{ route('logout') }}" class="nav-link @hasSection('navbar-class') text-white @else text-body @endif p-0" >
+                <i class="fas fa-sign-out-alt"></i>
+              </a>
+            </li>
+            {{-- <li class="nav-item pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link @hasSection('navbar-class') text-white @else text-body @endif p-0" id="profilesButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user me-sm-1"></i>
               </a>
               @include('layouts.features.profiles')
-            </li>
+            </li> --}}
             {{-- <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link @hasSection('navbar-class') text-white @else text-body @endif p-0" id="notificationsButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-bell cursor-pointer"></i>
@@ -69,6 +77,15 @@
               @include('layouts.features.notifications')
             </li> --}}
           @endauth
+          <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+              <div class="sidenav-toggler-inner">
+                <i class="sidenav-toggler-line"></i>
+                <i class="sidenav-toggler-line"></i>
+                <i class="sidenav-toggler-line"></i>
+              </div>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
