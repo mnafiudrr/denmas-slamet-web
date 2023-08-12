@@ -3,7 +3,7 @@
   <div class="card-header pb-0 p-3">
     <div class="row">
       <div class="col-md-8 d-flex align-items-center">
-        <h6 class="mb-0">Informasi Kehamilan</h6>
+        <h6 class="mb-0">Hasil</h6>
       </div>
       <div class="col-md-4 text-end">
       </div>

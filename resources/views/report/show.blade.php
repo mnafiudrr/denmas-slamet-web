@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Detail Laporan')
+@section('title', 'Detail Kesehatan / ' . $report->profile->fullname . ' / ' . date('d-m-Y H:i:s', strtotime($report->created_at)))
 
 @section('content')
 
