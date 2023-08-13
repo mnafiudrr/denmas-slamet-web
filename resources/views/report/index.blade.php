@@ -52,7 +52,9 @@
                   </div>
                 </td>
                 <td class="align-middle text-center text-sm">
-                  <h6 class="mb-0 text-sm">{{ $report->profile->fullname }}</h6>
+                  <a href="{{ route('user.show', $report->profile->user->username) }}">
+                    <h6 class="mb-0 text-sm">{{ $report->profile->fullname }}</h6>
+                  </a>
                 </td>
                 <td class="align-middle text-center text-sm">
                   <span class="badge badge-sm bg-gradient-{{ $report->pregnancy->hamil ? 'primary' : 'secondary' }}">{{ $report->pregnancy->hamil? 'hamil' : 'tidak hamil' }}</span>
