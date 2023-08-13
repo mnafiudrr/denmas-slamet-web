@@ -27,7 +27,7 @@
                 <div class="card-body p-3">
                     @foreach ($resultConfigs as $config)
                         <div class="form-group">
-                            <label class="form-control-label">{{ $config->type }} - {{ $config->name }}</label>
+                            <label class="form-control-label">{{ strlen($config->type) === 3 ? strtoupper($config->type) : ucwords(str_replace('_', ' ', $config->type)) }} = {{ $config->name }}</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="configs[{{ $config->type }}][{{ $config->name }}]"
                                     value="{{ $config->description }}">
