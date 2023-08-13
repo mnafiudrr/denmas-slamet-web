@@ -113,11 +113,21 @@
                     @csrf
                     <label>Username</label>
                     <div class="mb-3">
-                      <input type="text" class="form-control" name="username" placeholder="username" aria-label="username" aria-describedby="email-addon">
+                      <input type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="username" aria-label="username" aria-describedby="email-addon">
+                      <p class="text-sm mx-auto text-danger">
+                        @error('username')
+                            {{ $message }}
+                        @enderror
+                      </p>
                     </div>
                     <label>Password</label>
                     <div class="mb-3">
                       <input type="password" class="form-control" name="password" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                      <p class="text-sm mx-auto text-danger">
+                        @error('password')
+                            {{ $message }}
+                        @enderror
+                      </p>
                     </div>
                     {{-- <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
@@ -129,12 +139,6 @@
                   </form>
                 </div>
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                  <p class="mb-4 text-sm mx-auto text-danger">
-                    @if (session('error'))
-                        {{ session('error') }}
-                    @endif
-                    {{-- <a href="" class="text-info text-gradient font-weight-bold">Sign up</a> --}}
-                  </p>
                 </div>
               </div>
             </div>
@@ -201,9 +205,11 @@
         </div>
       </div>
     </div>
+    <input type="hidden" id="error-message" value="">
   </footer>
   <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
   <!--   Core JS Files   -->
+  <script src="{{ asset('assets/js/core/jquery-3.7.0.min.js') }}"></script>
   <script src="{{ asset('/assets/js/core/popper.min.js') }}"></script>
   <script src="{{ asset('/assets/js/core/bootstrap.min.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
@@ -221,6 +227,30 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{ asset('/assets/js/soft-ui-dashboard.min.js?v=1.0.7') }}"></script>
+  <!-- Sweet Alert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+      $(document).ready(function() {
+          @if (session('success'))
+              Swal.fire({
+                  icon: 'success',
+                  title: 'Berhasil',
+                  text: '{{ session('success') }}',
+                  showConfirmButton: false,
+                  timer: 2000
+              });
+          @endif
+
+          @if (session('error'))
+              Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: '{{ session('error') }}',
+                // showConfirmButton: false,
+              });
+          @endif
+      });
+  </script>
 </body>
 
 </html>

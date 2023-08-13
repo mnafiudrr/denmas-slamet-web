@@ -73,6 +73,6 @@ class UserController extends Controller
         $user->is_admin = $request->input('is_admin');
         $user->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Status admin berhasil diubah.');
     }
 }

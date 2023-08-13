@@ -60,7 +60,7 @@ class ResultConfigController extends Controller
             $resultConfig->description = $configs[$resultConfig->type][$resultConfig->name];
             $resultConfig->save();
         }
-        return redirect()->route('result-config.index');
+        return redirect()->route('result-config.index')->with('success', 'Status informasi berhasil diubah.');
     }
 
     /**
