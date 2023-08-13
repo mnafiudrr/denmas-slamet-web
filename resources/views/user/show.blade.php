@@ -58,7 +58,7 @@
                   </div>
                 </td>
                 <td class="align-middle text-center text-sm">
-                  <span class="badge badge-sm bg-gradient-{{ $report->pregnancy->hamil ? 'primary' : 'secondary' }}">{{ $report->pregnancy->hamil? 'hamil' : 'tidak hamil' }}</span>
+                  <span class="badge badge-sm bg-gradient-{{ $report->pregnancy->hamil ? 'primary' : 'secondary' }}">{{ $report->pregnancy->hamil? 'sedang hamil' : 'tidak hamil' }}</span>
                 </td>
                 <td class="align-middle text-center text-sm">
                   <h6 class="mb-0 text-sm">{{ $result->imt }}</h6>

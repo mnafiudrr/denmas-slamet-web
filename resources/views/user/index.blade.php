@@ -55,7 +55,7 @@
                   @php
                     $pregnancy = $user->profile->pregnancy()->orderBy('created_at', 'desc')->first();
                   @endphp
-                  <span class="badge badge-sm bg-gradient-{{ $pregnancy && $pregnancy->hamil ? 'primary' : 'secondary' }}">{{ $pregnancy && $pregnancy->hamil ? 'hamil' : 'tidak hamil' }}</span>
+                  <span class="badge badge-sm bg-gradient-{{ $pregnancy && $pregnancy->hamil ? 'primary' : 'secondary' }}">{{ $pregnancy && $pregnancy->hamil ? 'sedang hamil' : 'tidak hamil' }}</span>
                   {{-- <span class="text-secondary text-xs font-weight-bold">{{ $user->profile->address }}</span> --}}
                 </td>
                 <td class="align-middle text-center text-sm">
