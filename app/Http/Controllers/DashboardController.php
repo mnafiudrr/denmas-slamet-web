@@ -59,16 +59,22 @@ class DashboardController extends Controller
         }
 
         $monthlyImt = array_values($transformedData);
-        $lastPregnantProfilesCount = Pregnancy::select(DB::raw('COUNT(*) as count'))
-        ->whereIn('id', function ($query) {
-            $query->select(DB::raw('MAX(id)'))
-                ->from('pregnancies')
-                ->where('hamil', 'true')
-                ->groupBy('profile_id');
-        })
-        ->value('count');
 
-        // dd($monthlyCounts);
+        $latestPregnancies = Pregnancy::query()
+            ->select('profile_id', 'hamil', DB::raw('MAX(created_at) as latest_created_at'))
+            ->groupBy('profile_id', 'hamil')
+            ->orderBy('latest_created_at', 'asc')
+            ->get();
+        
+        $result = [];
+
+        foreach ($latestPregnancies as $pregnancy) {
+            $result[$pregnancy->profile_id] =  $pregnancy->hamil;
+        }
+        
+        $lastPregnantProfilesCount = count(array_filter($result, function($value) {
+            return $value === true;
+        }));
 
         return view('dashboard.index', compact('userCount', 'weeklyReportCount', 'userAdminCount', 'monthlyCounts', 'monthlyImt', 'lastPregnantProfilesCount'));
     }
