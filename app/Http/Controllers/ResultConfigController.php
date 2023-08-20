@@ -13,7 +13,7 @@ class ResultConfigController extends Controller
     public function index()
     {
         //
-        $resultConfigs = ResultConfig::orderBy('id')->get();
+        $resultConfigs = ResultConfig::orderBy('type')->get();
         return view('result-config.index', compact('resultConfigs'));
     }
 

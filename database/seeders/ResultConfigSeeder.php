@@ -38,6 +38,13 @@ class ResultConfigSeeder extends Seeder
             'max' => 100,
         ],
         [
+            'name' => 'Hipotensi',
+            'description' => 'Sebaiknya Anda menaikkan tekanan darah Anda',
+            'type' => 'tekanan_darah',
+            'min' => 0,
+            'max' => 1,
+        ],
+        [
             'name' => 'Normal',
             'description' => 'Sebaiknya Anda menjaga tekanan darah Anda',
             'type' => 'tekanan_darah',

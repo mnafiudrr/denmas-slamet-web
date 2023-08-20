@@ -91,21 +91,28 @@ class Result extends Model
 
     private function getStatusTekananDarah($tekanan_darah_sistol, $tekanan_darah_diastol)
     {
-        if ($tekanan_darah_sistol < 120 && $tekanan_darah_diastol < 80) {
+        if ($tekanan_darah_sistol < 110 && $tekanan_darah_diastol < 70) {
+            return 'Hipotensi';
+        } elseif (
+            $tekanan_darah_sistol >= 110
+            && $tekanan_darah_sistol <= 120
+            && $tekanan_darah_diastol >= 70
+            && $tekanan_darah_diastol <= 80
+        ) {
             return 'Normal';
         } elseif (
-                $tekanan_darah_sistol >= 120 
-                && $tekanan_darah_sistol <= 139 
-                && $tekanan_darah_diastol >= 80 
-                && $tekanan_darah_diastol <= 89
-            ) {
+            $tekanan_darah_sistol >= 121
+            && $tekanan_darah_sistol <= 139
+            && $tekanan_darah_diastol >= 81
+            && $tekanan_darah_diastol <= 89
+        ) {
             return 'Pra - hipertensi';
         } elseif (
-            $tekanan_darah_sistol >= 140 
-            && $tekanan_darah_sistol <= 159 
-            && $tekanan_darah_diastol >= 90 
+            $tekanan_darah_sistol >= 140
+            && $tekanan_darah_sistol <= 159
+            && $tekanan_darah_diastol >= 90
             && $tekanan_darah_diastol <= 99
-            ) {
+        ) {
             return 'Hipertensi tingkat 1';
         } elseif ($tekanan_darah_sistol > 160 && $tekanan_darah_diastol > 100) {
             return 'Hipertensi tingkat 2';
@@ -130,7 +137,7 @@ class Result extends Model
     private function getStatusHb($kadar_hb, $hamil)
     {
         $hb_normal = $hamil ? 11 : 12;
-        
+
         if ($kadar_hb < $hb_normal) {
             return 'Rendah';
         } elseif ($kadar_hb == $hb_normal) {
