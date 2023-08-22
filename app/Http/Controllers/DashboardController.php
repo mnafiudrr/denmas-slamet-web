@@ -42,6 +42,7 @@ class DashboardController extends Controller
         ->orderBy('status_imt', 'asc')
         ->get();
 
+        $transformedData = [];
 
         foreach ($monthlyImt as $entry) {
             $statusIMT = $entry['status_imt'];
