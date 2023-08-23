@@ -85,11 +85,9 @@
               <li class="nav-item d-flex align-items-center">
                 <a class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" target="_blank" href="https://github.com/mnafiudrr/denmas-slamet-mobile">Mobile App Project</a>
               </li>
-              <ul class="navbar-nav d-lg-block d-none">
-                <li class="nav-item">
-                  <a href="https://drive.google.com/file/d/1G3MMkMw8ILWcEEn4COOWAmGkx2NJqQcP/view?usp=sharing" target="_blank" class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Mobile App Download</a>
-                </li>
-              </ul>
+              <li class="nav-item d-flex align-items-center">
+                <a href="https://drive.google.com/" target="_blank" class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Mobile App Download</a>
+              </li>
             </div>
           </div>
         </nav>
@@ -105,8 +103,8 @@
             <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
               <div class="card card-plain mt-8">
                 <div class="card-header pb-0 text-left bg-transparent">
-                  <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
-                  <p class="mb-0">Enter your username and password to sign in</p>
+                  <h3 class="font-weight-bolder text-info text-gradient">Selamat Datang</h3>
+                  <p class="mb-0">Masukkan username dan password anda untuk masuk</p>
                 </div>
                 <div class="card-body">
                   <form role="form" method="POST" action="{{ route('login.authenticate') }}">
@@ -134,7 +132,7 @@
                       <label class="form-check-label" for="rememberMe">Remember me</label>
                     </div> --}}
                     <div class="text-center">
-                      <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+                      <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Masuk</button>
                     </div>
                   </form>
                 </div>

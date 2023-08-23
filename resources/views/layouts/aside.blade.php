@@ -112,14 +112,14 @@
                         id="sidenavCardIcon"></i>
                 </div>
                 <div class="docs-info">
-                    <h6 class="text-white up mb-0">Need help?</h6>
-                    <p class="text-xs font-weight-bold">Please contact us</p>
-                    <a href="https://wa.me/6282227181613"
+                    <h6 class="text-white up mb-0">Perlu Bantuan?</h6>
+                    <p class="text-xs font-weight-bold">Silahkan hubungi kami</p>
+                    <a href="https://wa.me/6289501275288"
                         target="_blank" class="btn btn-white btn-sm w-100 mb-0">Whatsapp</a>
                 </div>
             </div>
         </div>
         <a class="btn bg-gradient-primary mt-3 w-100"
-            href="https://github.com/mnafiudrr/denmas-slamet-web">Github</a>
+            href="https://wa.me/6282227181613">Developer</a>
     </div>
 </aside>
