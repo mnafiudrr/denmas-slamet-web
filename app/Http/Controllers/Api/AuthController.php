@@ -127,9 +127,7 @@ class AuthController extends Controller
      */
     public function profile(Request $request)
     {
-        $notFound = $this->checkIsDeleted($request->user()->delete_at);
-
-        if ($notFound)
+        if ($request->user()->delete_at)
             return response()->json([
                 'message' => 'User not found',
             ], 404);
