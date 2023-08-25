@@ -46,4 +46,9 @@ class AuthController extends Controller
         
         return redirect('/');
     }
+
+    public function privacyPolicy()
+    {
+        return view('auth.privacy-policy');
+    }
 }

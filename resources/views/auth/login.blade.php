@@ -83,10 +83,10 @@
                 </li> --}}
               </ul>
               <li class="nav-item d-flex align-items-center">
-                <a class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" target="_blank" href="https://github.com/mnafiudrr/denmas-slamet-mobile">Mobile App Project</a>
+                <a class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" target="_blank" href="">Mobile App Project</a>
               </li>
               <li class="nav-item d-flex align-items-center">
-                <a href="https://drive.google.com/" target="_blank" class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Mobile App Download</a>
+                <a href="" target="_blank" class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Mobile App Download</a>
               </li>
             </div>
           </div>
@@ -142,7 +142,7 @@
             </div>
             <div class="col-md-6">
               <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('{{ asset('/assets/img/kesmas.jpg') }}')"></div>
+                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('{{ asset('/assets/img/fikes-2.jpeg') }}')"></div>
                 {{-- <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('{{ asset('/assets/img/curved-images/curved6.jpg') }}')"></div> --}}
               </div>
             </div>
@@ -158,11 +158,8 @@
         <div class="col-lg-8 mb-4 mx-auto text-center">
           {{-- <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
             Company
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            About Us
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+          </a> --}}
+          {{-- <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
             Team
           </a>
           <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
@@ -176,6 +173,9 @@
           </a> --}}
         </div>
         <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
+          <a href="{{ route('privacy-policy') }}" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+            Privacy Policy
+          </a>
           {{-- <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
             <span class="text-lg fab fa-dribbble"></span>
           </a>
