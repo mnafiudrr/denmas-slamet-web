@@ -23,6 +23,10 @@ class User extends Authenticatable
         'password',
         'phone',
         'is_admin',
+        'delete_request',
+        'delete_request_at',
+        'delete_reason',
+        'delete_at',
     ];
 
     /**

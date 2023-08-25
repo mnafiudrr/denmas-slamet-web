@@ -13,6 +13,14 @@ class ProfileController extends Controller
      */
     public function index()
     {
+
+        $isDeleted = $this->checkIsDeleted(auth()->user());
+        if ($isDeleted)
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Unauthorized',
+            ], 401);
+
         $query = Profile::query()->with(['user']);
         if (!auth()->user()->is_admin)
             $query->where('id', auth()->user()->profile->id);
@@ -114,5 +122,11 @@ class ProfileController extends Controller
             ],
         ]);
     }
-
+    
+    private function checkIsDeleted($user)
+    {
+        if ($user->delete_at)
+            return true;
+        return false;
+    }
 }

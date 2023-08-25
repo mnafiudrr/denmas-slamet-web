@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/privacy-policy', [AuthController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('/delete-account', [AuthController::class, 'deleteAccount'])->name('delete-account');
+Route::post('/delete-account', [AuthController::class, 'deleteAccountRequest'])->name('delete-account.request');
 
 Route::group(['middleware' => 'auth', ], function() {
     Route::get('/', function() { return redirect()->route('dashboard'); })->name('root');

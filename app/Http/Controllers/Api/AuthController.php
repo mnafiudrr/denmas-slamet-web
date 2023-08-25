@@ -72,6 +72,13 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+        $notFound = $this->checkIsDeleted($request->username);
+
+        if ($notFound)
+            return response()->json([
+                'message' => 'Invalid login details',
+            ], 401);
+
         if (!auth()->attempt($request->only('username', 'password'))) 
             if (!auth()->attempt([
                 'phone' => $request->username,
@@ -184,5 +191,13 @@ class AuthController extends Controller
             ], 500);
 
         }
+    }
+
+    private function checkIsDeleted($username)
+    {
+        $user = User::where('username', $username)->first();
+        if (!$user || $user->delete_at)
+            return true;
+        return false;
     }
 }
