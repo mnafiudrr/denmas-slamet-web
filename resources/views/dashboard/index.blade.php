@@ -25,9 +25,6 @@
     data.push(monthlyCounts[i].count);
   }
 
-  console.log(labels);
-  console.log(data);
-
   new Chart(ctx, {
     type: "bar",
     data: {
@@ -94,6 +91,7 @@
 
 
   var ctx2 = document.getElementById("chart-line").getContext("2d");
+  var ctpmt = document.getElementById("chart-line-pmt").getContext("2d");
 
   var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
 
@@ -125,6 +123,7 @@
   const borderColors = ["#cb0c9f", "#3A416F", "#0FB9B1", "#4286f4"];
 
   const monthlyImt = @json($monthlyImt);
+  console.log(monthlyImt);
 
   var labelsImt = [];
   var dataImt = [];
@@ -171,6 +170,100 @@
     data: {
       labels: labelsImt,
       datasets: dataImt,
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
+      scales: {
+        y: {
+          grid: {
+            drawBorder: false,
+            display: true,
+            drawOnChartArea: true,
+            drawTicks: false,
+            borderDash: [5, 5]
+          },
+          ticks: {
+            display: true,
+            padding: 10,
+            color: '#b2b9bf',
+            font: {
+              size: 11,
+              family: "Open Sans",
+              style: 'normal',
+              lineHeight: 2
+            },
+          }
+        },
+        x: {
+          grid: {
+            drawBorder: false,
+            display: false,
+            drawOnChartArea: false,
+            drawTicks: false,
+            borderDash: [5, 5]
+          },
+          ticks: {
+            display: true,
+            color: '#b2b9bf',
+            padding: 20,
+            font: {
+              size: 11,
+              family: "Open Sans",
+              style: 'normal',
+              lineHeight: 2
+            },
+          }
+        },
+      },
+    },
+  });
+
+  const monthlyPmt = @json($monthlyPmt);
+  console.log(monthlyPmt);
+
+  var dataPmt = [];
+  for (var i = 0; i < monthlyPmt.length; i++) {
+    dataPmt.push({
+      label: monthlyPmt[i].pemberian_pmt ? 'Ya' : 'Tidak',
+      tension: 0.4,
+      borderWidth: 0,
+      pointRadius: 0,
+      borderColor: borderColors[i],
+      borderWidth: 3,
+      backgroundColor: gradientStroke[i],
+      fill: true,
+      data: [],
+      maxBarThickness: 6
+    });
+  }
+
+  for (var i = 0; i < monthRange.length; i++) {
+    for (var j = 0; j < monthlyPmt.length; j++) {
+      if (monthlyPmt[j].count[monthRange[i]]) {
+        const count = monthlyPmt[j].count[monthRange[i]];
+        dataPmt[j].data.push(count);
+        console.log(dataPmt[j].data);
+      } else {
+        dataPmt[j].data.push(0);
+      }
+    }
+  }
+
+  new Chart(ctpmt, {
+    type: "line",
+    data: {
+      labels: labelsImt,
+      datasets: dataPmt,
     },
     options: {
       responsive: true,

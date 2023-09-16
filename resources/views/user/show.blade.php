@@ -24,6 +24,11 @@
               <button type="button" class="btn btn-block bg-gradient-danger mb-3" data-bs-toggle="modal" data-bs-target="#modal-to-admin">Jadikan Pengguna</button>
             @endif
           @endif
+          @if ($user->name != 'administrator')
+            <button type="button" class="btn bg-gradient-secondary" data-bs-toggle="modal" data-bs-target="#modal-change-password">
+              Ubah Password
+            </button>
+          @endif
         </div>
       </div>
       <div class="card-body px-0 pt-0 pb-2">
@@ -135,6 +140,29 @@
     </div>
   </div>
 @endif
+
+<div class="modal fade" id="modal-change-password" tabindex="-1" role="dialog" aria-labelledby="modal-change-password" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ubah Password</h5>
+        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="password-input" class="col-form-label">Password Baru</label>
+            <input class="form-control" type="text" value="" id="password-input" name="password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="change-password-button" class="btn bg-gradient-primary">OK</button>
+        </div>
+    </div>
+  </div>
+</div>
   
 @endsection
 
@@ -174,6 +202,67 @@
     // paginationHTML += '<li class="page-item"><a class="page-link" href="javascript:;" aria-label="Next"><i class="fa fa-angle-right"></i><span class="sr-only">Next</span></a></li></ul>';
 
     // $('.dataTables_paginate').html(paginationHTML);
+    
+    $('#change-password-button').on('click', function(){
+
+        const password = $('#password-input').val();
+
+        if (password.length >= 8 ){
+          Swal.fire({
+              icon: 'warning',
+              title: 'Peringatan',
+              text: 'Apakah anda yakin ingin mengubah password pengguna ini menjadi "'+ $('#password-input').val() +'"?',
+              showConfirmButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Ya, Ubah',
+              cancelButtonText: 'Tidak, Batal',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              var password = $('#password-input').val();
+              $.ajax({
+                url: '{{ route('user.change-password', $user->username) }}',
+                type: 'POST',
+                data: {
+                  _token: '{{ csrf_token() }}',
+                  password: password
+                },
+                success: function(data){
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Password berhasil diubah menjadi'+ $('#password-input').val(),
+                    showConfirmButton: false,
+                    timer: 1500
+                  }).then((result) => {
+                    // close modal
+                    $('#modal-change-password').modal('hide');
+                    // reset form
+                    $('#password-input').val('');
+                  })
+                },
+                error: function(data){
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: 'Password gagal diubah',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                }
+              })
+            }
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            text: 'Password minimal 8 karakter',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+    })
+
   });
 
 </script>

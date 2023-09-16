@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PmtMonitor;
 use App\Models\Pregnancy;
 use App\Models\Report;
 use App\Models\Result;
@@ -42,6 +43,16 @@ class DashboardController extends Controller
         ->orderBy('status_imt', 'asc')
         ->get();
 
+        $monthlyPmt = PmtMonitor::select(
+            DB::raw('COUNT(*) as count'),
+            'pemberian_pmt',
+            DB::raw("EXTRACT(MONTH FROM tanggal_home_visit) as month")
+        )
+        ->groupBy('pemberian_pmt', 'month')
+        ->orderBy('month', 'asc')
+        ->orderBy('pemberian_pmt', 'asc')
+        ->get();
+
         $transformedData = [];
 
         foreach ($monthlyImt as $entry) {
@@ -61,6 +72,27 @@ class DashboardController extends Controller
 
         $monthlyImt = array_values($transformedData);
 
+        $transformedData = [];
+
+        foreach ($monthlyPmt as $entry) {
+            $pemberianPmt = $entry['pemberian_pmt'];
+            $month = $entry['month'];
+            $count = $entry['count'];
+
+            if (!isset($transformedData[$pemberianPmt])) {
+                $transformedData[$pemberianPmt] = [
+                    'pemberian_pmt' => $pemberianPmt,
+                    'count' => [],
+                ];
+            }
+
+            $transformedData[$pemberianPmt]['count'][$month] = $count;
+        }
+
+        $monthlyPmt = array_values($transformedData);
+
+        // dd($monthlyPmt, $monthlyImt);
+
         $latestPregnancies = Pregnancy::query()
             ->select('profile_id', 'hamil', DB::raw('MAX(created_at) as latest_created_at'))
             ->groupBy('profile_id', 'hamil')
@@ -77,7 +109,9 @@ class DashboardController extends Controller
             return $value === true;
         }));
 
-        return view('dashboard.index', compact('userCount', 'weeklyReportCount', 'userAdminCount', 'monthlyCounts', 'monthlyImt', 'lastPregnantProfilesCount'));
+
+
+        return view('dashboard.index', compact('userCount', 'weeklyReportCount', 'userAdminCount', 'monthlyCounts', 'monthlyPmt', 'monthlyImt', 'lastPregnantProfilesCount'));
     }
 
     /**

@@ -75,4 +75,16 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Status admin berhasil diubah.');
     }
+
+    public function changePassword(Request $request, string $username)
+    {
+        $user = User::where('username', $username)->firstOrFail();
+        $user->password = bcrypt($request->input('password'));
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Password berhasil diubah.',
+        ]);
+    }
 }

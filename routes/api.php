@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\NutritionalStatusHistoryController;
+use App\Http\Controllers\Api\PmtMonitorController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ReportController;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +47,17 @@ Route::group([
         Route::get('/', [ProfileController::class, 'index']);
         Route::get('/{id}', [ProfileController::class, 'show']);
         Route::put('/{id}', [ProfileController::class, 'update']);
+    });
+
+    Route::group([ 'prefix' => 'pmt-monitor' ], function () {
+        Route::get('/', [PmtMonitorController::class, 'index']);
+        Route::get('/{id}', [PmtMonitorController::class, 'show']);
+        Route::post('/', [PmtMonitorController::class, 'store']);
+    });
+
+    Route::group([ 'prefix' => 'nutritional-status-history' ], function () {
+        Route::get('/', [NutritionalStatusHistoryController::class, 'index']);
+        Route::post('/', [NutritionalStatusHistoryController::class, 'store']);
     });
 });
 
