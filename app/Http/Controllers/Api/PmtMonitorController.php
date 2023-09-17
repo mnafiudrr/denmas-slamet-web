@@ -15,7 +15,7 @@ class PmtMonitorController extends Controller
     public function index()
     {
         //
-        $pmtMonitors = PmtMonitor::with('createdBy')->get();
+        $pmtMonitors = PmtMonitor::with('createdBy')->orderBy('created_at', 'desc')->get();
 
         $pmtMonitors->map(function ($pmtMonitor) {
             $pmtMonitor->created_by = $pmtMonitor->createdBy->name;

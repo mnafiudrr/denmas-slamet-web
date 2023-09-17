@@ -16,7 +16,7 @@ class NutritionalStatusHistoryController extends Controller
     public function index()
     {
         //
-        $nutritionalStatusHistories = NutritionalStatusHistory::query();
+        $nutritionalStatusHistories = NutritionalStatusHistory::orderBy('created_at', 'desc');
 
         if (!auth()->user()->is_admin) {
             $nutritionalStatusHistories->where('created_by', auth()->user()->id);
