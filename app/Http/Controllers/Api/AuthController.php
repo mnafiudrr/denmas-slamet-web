@@ -85,7 +85,7 @@ class AuthController extends Controller
                 'password' => $request->password,
             ]))
                 return response()->json([
-                    'message' => 'Invalid login details',
+                    'message' => 'Invalid login detail',
                 ], 401);
 
         $user = User::where('username', $request->username)->first();
@@ -200,7 +200,7 @@ class AuthController extends Controller
 
     private function checkIsDeleted($username)
     {
-        $user = User::where('username', $username)->first();
+        $user = User::where('username', $username)->orWhere('phone', $username)->first();
         if (!$user || $user->delete_at)
             return true;
         return false;
