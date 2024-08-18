@@ -36,7 +36,7 @@ class ProfileController extends Controller
                 'riwayat_kesehatan_keluarga' => $profile->riwayat_kesehatan_keluarga,
                 'phone' => $profile->user->phone,
                 'username' => $profile->user->username,
-                'is_admin' => $profile->user->is_admin,
+                'is_admin' => !!$profile->user->is_admin,
             ];
         });
 
@@ -71,7 +71,7 @@ class ProfileController extends Controller
                 'riwayat_kesehatan_dahulu' => $profile->riwayat_kesehatan_dahulu,
                 'riwayat_kesehatan_keluarga' => $profile->riwayat_kesehatan_keluarga,
                 'username' => $profile->user->username,
-                'is_admin' => $profile->user->is_admin,
+                'is_admin' => !!$profile->user->is_admin,
             ],
         ]);
     }
@@ -118,7 +118,7 @@ class ProfileController extends Controller
                 'riwayat_kesehatan_keluarga' => $profile->riwayat_kesehatan_keluarga,
                 'phone' => $profile->user->phone,
                 'username' => $profile->user->username,
-                'is_admin' => $profile->user->is_admin,
+                'is_admin' => !!$profile->user->is_admin,
             ],
         ]);
     }
