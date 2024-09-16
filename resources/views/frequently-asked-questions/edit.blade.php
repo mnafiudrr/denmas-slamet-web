@@ -18,6 +18,10 @@
                 </div>
                 <div class="card-body p-3">
                     <div class="form-group">
+                        <label for="position">Urutan Ke</label>
+                        <input type="number" name="position" class="form-control" placeholder="1" value="{{ $faq->position }}">
+                    </div>
+                    <div class="form-group">
                         <label for="question">Pertanyaan</label>
                         <input type="text" name="question" class="form-control" placeholder="Pertanyaan" value="{{ $faq->question }}">
                     </div>

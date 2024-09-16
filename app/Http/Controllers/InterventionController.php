@@ -17,7 +17,7 @@ class InterventionController extends Controller
     {
         $intervention = Intervention::find($id);
         if (!$intervention) {
-            return redirect()->route('interventions.index');
+            return redirect()->route('interventions.index')->with('error', 'Intervensi tidak ditemukan');
         }
         return view('intervention.edit', ['intervention' => $intervention]);
     }
@@ -26,9 +26,9 @@ class InterventionController extends Controller
     {
         $intervention = Intervention::find($id);
         if (!$intervention)
-            return redirect()->route('intervention.index');
+            return redirect()->route('intervention.index')->with('error', 'Intervensi tidak ditemukan');
         
         $intervention->update($request->all());
-        return redirect()->route('intervention.index');
+        return redirect()->route('intervention.index')->with('success', 'Intervensi diupdate');
     }
 }

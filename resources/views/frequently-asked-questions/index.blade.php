@@ -35,10 +35,18 @@
                                             <div class="card-body">
                                                 {{ $faq->answer }}
                                             </div>
-                                            <div class="position-absolute end-0">
+                                            <div class="position-absolute end-5">
                                                 <a href="{{ route('frequently-asked-questions.edit', ['id' => $faq]) }}">
                                                     <i class="fa fa-edit text-md pt-1 me-3 text-primary" aria-hidden="true"></i>
                                                 </a>
+                                            </div>
+                                            <div class="position-absolute end-0">
+                                                <form action="{{ route('frequently-asked-questions.destroy', ['id' => $faq]) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <i class="fa fa-trash text-md pt-1 me-3 text-danger remove-button" aria-hidden="true"></i>
+                                                    <button type="submit" class="btn bg-gradient-primary" style="display:none"></button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -52,4 +60,18 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+<script>
+  $(document).ready(function() {
+    $('.remove-button').click(function() {
+        if (!confirm('Apakah kamu yakin?')) {
+            return false;
+        } else {
+            $(this).closest('form').submit();
+        }
+    });
+  });
+</script>
 @endsection

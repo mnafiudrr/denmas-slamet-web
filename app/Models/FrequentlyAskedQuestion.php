@@ -17,4 +17,13 @@ class FrequentlyAskedQuestion extends Model
         'status',
         'position',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::creating(function ($model) {
+            $model->position = FrequentlyAskedQuestion::count() + 1;
+        });
+    }
 }

@@ -24,6 +24,6 @@ class PrinsipTigajController extends Controller
         $tigaJ = TigaJ::first();
         $tigaJ->content = $request->content;
         $tigaJ->save();
-        return redirect()->route('prinsip-3j.index');
+        return redirect()->route('prinsip-3j.index')->with('success', 'Prinsip 3J diupdate');
     }
 }
