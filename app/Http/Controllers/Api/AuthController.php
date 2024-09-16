@@ -139,7 +139,7 @@ class AuthController extends Controller
                 'name' => $request->user()->name,
                 'username' => $request->user()->username,
                 'phone' => $request->user()->phone,
-                'is_admin' => $request->user()->is_admin,
+                'is_admin' => !!$request->user()->is_admin,
                 'profile_id' => $request->user()->profile->id,
                 'fullname' => $request->user()->profile->fullname,
             ],
