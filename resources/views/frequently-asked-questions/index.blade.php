@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <div class="row">
@@ -59,10 +59,43 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h6>Daftar Pertanyaan</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-3">
+                    <h6 class="mb-0">Urutan</h6>
+                    <form
+                        action="{{ route('frequently-asked-questions.reorder') }}"
+                        method="POST"
+                    >
+                        @csrf
+                        @method('PUT')
+                        <ul class="list-group" id="sortable">
+                            @foreach ($faqs as $faq)
+                            <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                                <div class="d-flex flex-column">
+                                    <h6 class="text-sm">{{ $faq->question }}</h6>
+                                    <input type="hidden" name="faqs[]" value="{{ $faq->id }}">
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                        <button type="submit" class="btn bg-gradient-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
 @section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script>
   $(document).ready(function() {
     $('.remove-button').click(function() {
@@ -72,6 +105,10 @@
             $(this).closest('form').submit();
         }
     });
+
+    $( function() {
+        $( "#sortable" ).sortable();
+    } );
   });
 </script>
 @endsection

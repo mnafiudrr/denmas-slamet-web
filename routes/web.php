@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth', ], function() {
     Route::get('/frequently-asked-questions/{id}/edit', [FrequentlyAskedQuestionController::class, 'edit'])->name('frequently-asked-questions.edit');
     Route::put('/frequently-asked-questions/{id}/edit', [FrequentlyAskedQuestionController::class, 'update'])->name('frequently-asked-questions.update');
     Route::delete('/frequently-asked-questions/{id}', [FrequentlyAskedQuestionController::class, 'destroy'])->name('frequently-asked-questions.destroy');
+    Route::put('/frequently-asked-questions/reorder', [FrequentlyAskedQuestionController::class, 'reorder'])->name('frequently-asked-questions.reorder');
 
     Route::get('/intervention', [InterventionController::class, 'index'])->name('intervention.index');
     Route::get('/intervention/{id}/edit', [InterventionController::class, 'edit'])->name('intervention.edit');

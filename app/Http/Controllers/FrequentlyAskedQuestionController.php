@@ -52,4 +52,16 @@ class FrequentlyAskedQuestionController extends Controller
         $faq->delete();
         return redirect()->route('frequently-asked-questions.index')->with('success', 'Berhasil dihapus');
     }
+
+    public function reorder(Request $request)
+    {
+        $faqs = $request->get('faqs');
+        foreach ($faqs as $key => $faq) {
+            $faq = FrequentlyAskedQuestion::find($faq);
+            $faq->position = $key + 1;
+            $faq->save();
+        }
+
+        return redirect()->route('frequently-asked-questions.index')->with('success', 'Urutan FAQ diupdate');
+    }
 }
