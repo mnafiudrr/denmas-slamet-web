@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\FrequentlyAskedQuestionController;
+use App\Http\Controllers\Api\InterventionController;
 use App\Http\Controllers\Api\NutritionalStatusHistoryController;
 use App\Http\Controllers\Api\PmtMonitorController;
+use App\Http\Controllers\Api\PrinsipTigajController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ReportController;
 use Illuminate\Support\Facades\Route;
@@ -58,6 +61,19 @@ Route::group([
     Route::group([ 'prefix' => 'nutritional-status-history' ], function () {
         Route::get('/', [NutritionalStatusHistoryController::class, 'index']);
         Route::post('/', [NutritionalStatusHistoryController::class, 'store']);
+    });
+
+    Route::group([ 'prefix' => 'frequently-asked-questions' ], function () {
+        Route::get('/', [FrequentlyAskedQuestionController::class, 'index']);
+    });
+
+    Route::group([ 'prefix' => 'intervention' ], function () {
+        Route::get('/', [InterventionController::class, 'index']);
+        Route::get('/{id}', [InterventionController::class, 'show']);
+    });
+
+    Route::group([ 'prefix' => 'prinsip-3j' ], function () {
+       Route::get('/', [PrinsipTigajController::class, 'index']); 
     });
 });
 

@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FrequentlyAskedQuestionController;
+use App\Http\Controllers\InterventionController;
 use App\Http\Controllers\NutritionalStatusHistoryController;
 use App\Http\Controllers\PmtMonitorController;
+use App\Http\Controllers\PrinsipTigajController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ResultConfigController;
 use App\Http\Controllers\StandarAntropometriController;
@@ -40,6 +43,8 @@ Route::group(['middleware' => 'auth', ], function() {
     Route::get('/report/{encryptedId}', [ReportController::class, 'show'])->name('report.show');
 
     Route::get('/result-config', [ResultConfigController::class, 'index'])->name('result-config.index');
+    Route::get('/result-config/edit', [ResultConfigController::class, 'edit'])->name('result-config.edit');
+    Route::put('/result-config/edit', [ResultConfigController::class, 'store'])->name('result-config.store');
     Route::put('/result-config', [ResultConfigController::class, 'update'])->name('result-config.update');
 
     Route::get('/standar-antropometri', [StandarAntropometriController::class, 'index'])->name('standar-antropometri.index');
@@ -48,6 +53,20 @@ Route::group(['middleware' => 'auth', ], function() {
     Route::get('/pmt-monitor', [PmtMonitorController::class, 'index'])->name('pmt-monitor.index');
 
     Route::get('/nutritional-status-history', [NutritionalStatusHistoryController::class, 'index'])->name('nutritional-status-history.index');
+
+    Route::get('/prinsip-3j', [PrinsipTigajController::class, 'index'])->name('prinsip-3j.index');
+    Route::get('/prinsip-3j/edit', [PrinsipTigajController::class, 'edit'])->name('prinsip-3j.edit');
+    Route::put('/prinsip-3j/edit', [PrinsipTigajController::class, 'update'])->name('prinsip-3j.update');
+
+    Route::get('/frequently-asked-questions', [FrequentlyAskedQuestionController::class, 'index'])->name('frequently-asked-questions.index');
+    Route::get('/frequently-asked-questions/create', [FrequentlyAskedQuestionController::class, 'create'])->name('frequently-asked-questions.create');
+    Route::post('/frequently-asked-questions/create', [FrequentlyAskedQuestionController::class, 'store'])->name('frequently-asked-questions.store');
+    Route::get('/frequently-asked-questions/{id}/edit', [FrequentlyAskedQuestionController::class, 'edit'])->name('frequently-asked-questions.edit');
+    Route::put('/frequently-asked-questions/{id}/edit', [FrequentlyAskedQuestionController::class, 'update'])->name('frequently-asked-questions.update');
+
+    Route::get('/intervention', [InterventionController::class, 'index'])->name('intervention.index');
+    Route::get('/intervention/{id}/edit', [InterventionController::class, 'edit'])->name('intervention.edit');
+    Route::put('/intervention/{id}/edit', [InterventionController::class, 'update'])->name('intervention.update');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
