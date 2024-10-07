@@ -7,6 +7,7 @@
     $currentRoute = Route::currentRouteName();
   @endphp
   @include('layouts.head')
+  @yield('head')
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -38,6 +39,8 @@
 
   @include('layouts.fixed-plugin')
   @include('layouts.script')
+
+  @stack('script')
 
 </body>
 
