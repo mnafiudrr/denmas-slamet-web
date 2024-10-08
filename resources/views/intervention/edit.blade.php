@@ -65,13 +65,14 @@
             Font,
             Paragraph,
             List,
-            ListProperties
+            ListProperties,
+            Alignment
         } from 'ckeditor5';
 
     ClassicEditor
         .create( document.querySelector( '#content' ), {
             plugins: [
-                Essentials, Bold, Italic, Font, Paragraph, List, ListProperties
+                Essentials, Bold, Italic, Font, Paragraph, List, ListProperties, Alignment
             ],
             toolbar: {
                 items: [
@@ -82,6 +83,8 @@
                     'bold', 'italic',
                     '|',
                     'bulletedList', 'numberedList',
+                    '|',
+                    'alignment',
                 ]
             },
         } )
