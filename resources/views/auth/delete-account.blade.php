@@ -147,8 +147,11 @@
           </a> --}}
                 </div>
                 <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+                    <a href="{{ route('privacy-policy') }}" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
                         Privacy Policy
+                    </a>
+                    <a href="{{ route('delete-account') }}" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+                        Hapus Akun
                     </a>
                     {{-- <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
             <span class="text-lg fab fa-dribbble"></span>

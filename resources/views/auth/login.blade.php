@@ -173,21 +173,9 @@
           <a href="{{ route('privacy-policy') }}" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
             Privacy Policy
           </a>
-          {{-- <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-dribbble"></span>
+          <a href="{{ route('delete-account') }}" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+            Hapus Akun
           </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-twitter"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-instagram"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-pinterest"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-github"></span>
-          </a> --}}
         </div>
       </div>
       <div class="row">
