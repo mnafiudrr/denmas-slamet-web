@@ -79,9 +79,7 @@ class AuthController extends Controller
 
             $user = User::where('username', $credentials['username'])->first();
 
-            if ($user->delete_request){
-                return back()->with('error', 'Your request has been sent before, with '.$user->delete_reason.' reason.');
-            }
+            $requested = $user->delete_request;
 
             $user->update([
                 'delete_request' => true,
@@ -92,6 +90,11 @@ class AuthController extends Controller
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
+
+            if ($requested){
+                return back()->with('success', 'Your request has been updated with the new reason.');
+            }
+
             return back()->with('success', 'Your request has been sent.');
         }
         
