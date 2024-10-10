@@ -86,6 +86,7 @@
                                   <li>Masukkan alasan penghapusan akun Anda.</li>
                                   <li>Klik tombol "Kirim Permintaan".</li>
                                   <li>Anda akan menerima pesan bahwa permintaan hapus akun Anda berhasil diajukan.</li>
+                                  <li>Silahkan menunggu proses penghapusan permanen akun Anda oleh admin.</li>
                               </ol>
                           
                               <h2>Formulir Permintaan Hapus Akun</h2>
