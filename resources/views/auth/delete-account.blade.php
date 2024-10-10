@@ -57,36 +57,12 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navigation">
                             <ul class="navbar-nav mx-auto ms-xl-auto me-xl-7">
-                                {{-- <li class="nav-item">
-                  <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{{ route('dashboard') }}">
-                    <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
-                    Dashboard
-                  </a>
-                </li> --}}
-                                {{-- <li class="nav-item">
-                  <a class="nav-link me-2" href="{{ asset('/pages/profile.html') }}">
-                    <i class="fa fa-user opacity-6 text-dark me-1"></i>
-                    Profile
-                  </a>
-                </li> --}}
-                                {{-- <li class="nav-item">
-                  <a class="nav-link me-2" href="{{ route('register') }}">
-                    <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
-                    Sign Up
-                  </a>
-                </li> --}}
-                                {{-- <li class="nav-item">
-                  <a class="nav-link me-2" href="{{ route('login') }}">
-                    <i class="fas fa-key opacity-6 text-dark me-1"></i>
-                    Sign In
-                  </a>
-                </li> --}}
                             </ul>
                             <li class="nav-item d-flex align-items-center">
                               <a class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" target="_blank" href="">Mobile App Project</a>
                             </li>
                             <li class="nav-item d-flex align-items-center">
-                              <a href="" target="_blank" class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Mobile App Download</a>
+                              <a href="https://play.google.com/store/apps/details?id=com.fiufiu.denmasslamet" target="_blank" class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Mobile App Download</a>
                             </li>
                         </div>
                     </div>
@@ -102,8 +78,9 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 d-flex flex-column mx-auto">
                             <div class="card card-plain mt-8">
-                              <h1>Tata Cara Penghapusan Akun</h1>
+                              <h1>Tata Cara Penghapusan Akun aplikasi <a href="https://play.google.com/store/apps/details?id=com.fiufiu.denmasslamet">DENMAS SLAMET</a></h1>
                               <ol>
+                                  <li>Pastikan anda memiliki akun <a href="https://play.google.com/store/apps/details?id=com.fiufiu.denmasslamet">Denmas Slamet</a> di Playstore (<a href="https://play.google.com/store/apps/details?id=com.fiufiu.denmasslamet">https://play.google.com/store/apps/details?id=com.fiufiu.denmasslamet</a>).</li>
                                   <li>Buka halaman <a href="{{ route('delete-account') }}">{{ route('delete-account') }}</a> di browser Anda.</li>
                                   <li>Masukkan username dan password akun Anda.</li>
                                   <li>Masukkan alasan penghapusan akun Anda.</li>

@@ -86,7 +86,7 @@
                               <a class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" target="_blank" href="">Mobile App Project</a>
                             </li>
                             <li class="nav-item d-flex align-items-center">
-                              <a href="" target="_blank" class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Mobile App Download</a>
+                              <a href="https://play.google.com/store/apps/details?id=com.fiufiu.denmasslamet" target="_blank" class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Mobile App Download</a>
                             </li>
                         </div>
                     </div>
