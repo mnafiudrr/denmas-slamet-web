@@ -91,12 +91,12 @@ class Result extends Model
 
     private function getStatusTekananDarah($tekanan_darah_sistol, $tekanan_darah_diastol)
     {
-        if ($tekanan_darah_sistol < 110 && $tekanan_darah_diastol < 70) {
+        if ($tekanan_darah_sistol < 100 && $tekanan_darah_diastol < 60) {
             return 'Hipotensi';
         } elseif (
-            $tekanan_darah_sistol >= 110
+            $tekanan_darah_sistol >= 100
             && $tekanan_darah_sistol <= 120
-            && $tekanan_darah_diastol >= 70
+            && $tekanan_darah_diastol >= 60
             && $tekanan_darah_diastol <= 80
         ) {
             return 'Normal';
