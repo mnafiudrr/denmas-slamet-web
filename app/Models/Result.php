@@ -54,7 +54,7 @@ class Result extends Model
         $status_imt = $this->getStatusImt($imt);
         $status_tekanan_darah = $this->getStatusTekananDarah($health->tekanan_darah_sistol, $health->tekanan_darah_diastol);
         $status_gula = $this->getStatusGula($health->kadar_gula);
-        $status_hb = $this->getStatusHb($health->kadar_hb, $pregnancy->hamil);
+        $status_hb = $this->getStatusHb($health->kadar_hb, $pregnancy->hamil, $report->profile->gender);
         $status_kolesterol = $this->getStatusKolesterol($health->kadar_kolesterol);
         $status_asam_urat = $this->getStatusAsamUrat($health->kadar_asam_urat);
 
@@ -134,18 +134,26 @@ class Result extends Model
         }
     }
 
-    private function getStatusHb($kadar_hb, $hamil)
+    private function getStatusHb($kadar_hb, $hamil, $gender = 'wanita')
     {
-        $hb_normal = $hamil ? 11 : 12;
 
-        if ($kadar_hb < $hb_normal) {
+        $lowest = 11;
+        $highest = 11;
+
+        if ($gender == 'pria') {
+            $lowest = 13;
+            $highest = 17;
+        } else if (!$hamil) {
+            $lowest = 12;
+            $highest = 15;
+        }
+
+        if ($kadar_hb < $lowest) {
             return 'Rendah';
-        } elseif ($kadar_hb == $hb_normal) {
-            return 'Normal';
-        } elseif ($kadar_hb > $hb_normal) {
+        } elseif ($kadar_hb > $highest) {
             return 'Tinggi';
         } else {
-            return 'Data tidak valid';
+            return 'normal';
         }
     }
 

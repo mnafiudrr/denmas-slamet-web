@@ -17,6 +17,7 @@ class Profile extends Model
         'address',
         'birthplace',
         'birthday',
+        'gender',
         'riwayat_kesehatan_dahulu',
         'riwayat_kesehatan_keluarga',
     ];

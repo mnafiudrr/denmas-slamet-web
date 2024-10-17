@@ -24,6 +24,7 @@ class AuthController extends Controller
             'address' => 'string',
             'birthplace' => 'string',
             'birthday' => 'date',
+            'gender' => 'string|in:pria,wanita',
         ]);
 
         if ($validator->fails()) {
@@ -48,6 +49,7 @@ class AuthController extends Controller
                 'address' => $request->address,
                 'birthplace' => $request->birthplace,
                 'birthday' => $request->birthday,
+                'gender' => $request->gender,
             ]);
 
             DB::commit();
@@ -157,6 +159,7 @@ class AuthController extends Controller
             'address' => 'string',
             'birthplace' => 'string',
             'birthday' => 'date',
+            'gender' => 'string|in:pria,wanita',
         ]);
 
         if ($validator->fails()) {
@@ -179,6 +182,7 @@ class AuthController extends Controller
                 'address' => $request->address,
                 'birthplace' => $request->birthplace,
                 'birthday' => $request->birthday,
+                'gender' => $request->gender,
             ]);
 
             DB::commit();
