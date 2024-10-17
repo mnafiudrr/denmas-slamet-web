@@ -106,6 +106,7 @@ class AuthController extends Controller
                 'is_admin' => !!$user->is_admin,
                 'profile_id' => $user->profile->id,
                 'fullname' => $user->profile->fullname,
+                'gender' => $user->profile->gender,
             ],
             'token' => $token,
         ], 200);
@@ -144,6 +145,7 @@ class AuthController extends Controller
                 'is_admin' => !!$request->user()->is_admin,
                 'profile_id' => $request->user()->profile->id,
                 'fullname' => $request->user()->profile->fullname,
+                'gender' => $request->user()->profile->gender,
             ],
         ], 200);
     }
