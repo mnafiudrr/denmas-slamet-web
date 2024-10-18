@@ -153,7 +153,7 @@ class Result extends Model
         } elseif ($kadar_hb > $highest) {
             return 'Tinggi';
         } else {
-            return 'normal';
+            return 'Normal';
         }
     }
 
