@@ -3,13 +3,28 @@
 @section('title', 'Intervensi')
 
 @section('content')
+
+    @php
+        $excludedDeleteKeys = [
+            'imt',
+            'tekanan_darah',
+            'gula',
+            'hb',
+            'kolesterol',
+            'asam_urat',
+        ];
+    @endphp
+
     <div class="row">
         <div class="col-md-6">
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             <h6>Intervensi</h6>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <a href="{{ route('intervention.create') }}" class="btn btn-primary btn-sm mb-0"><i class="fa fa-plus"></i> Tambah</a>
                         </div>
                     </div>
                 </div>
@@ -39,9 +54,17 @@
                                             </div>
                                             <div class="position-absolute end-0">
                                                 <a href="{{ route('intervention.edit', ['id' => $intervention]) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                                    <i class="fa fa-edit text-md pt-1 me-3 text-primary" aria-hidden="true"></i>
-                                                    <span class="">Edit</span>
+                                                    <i class="fa-solid fa-edit text-md pt-1 me-3 text-primary"></i>
                                                 </a>
+                                                @if (!in_array($intervention->key, $excludedDeleteKeys))
+                                                <form action="{{ route('intervention.destroy', ['id' => $intervention]) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline" onclick="return confirm('Are you sure you want to delete this intervention?');">
+                                                        <i class="fa-solid fa-trash text-md pt-1 me-3 text-danger"></i>
+                                                    </button>
+                                                </form>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

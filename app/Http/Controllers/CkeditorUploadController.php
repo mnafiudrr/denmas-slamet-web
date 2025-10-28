@@ -26,8 +26,6 @@ class CkeditorUploadController extends Controller
 
         $url = Storage::disk('public')->url($path);
 
-        // $url = str_replace('http://localhost', 'http://localhost:8000', $url);
-
         return response()->json([
             'url' => $url
         ], 201);

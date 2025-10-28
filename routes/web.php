@@ -68,8 +68,11 @@ Route::group(['middleware' => 'auth', ], function() {
     Route::put('/frequently-asked-questions/reorder', [FrequentlyAskedQuestionController::class, 'reorder'])->name('frequently-asked-questions.reorder');
 
     Route::get('/intervention', [InterventionController::class, 'index'])->name('intervention.index');
+    Route::get('/intervention/create', [InterventionController::class, 'create'])->name('intervention.create');
+    Route::post('/intervention/create', [InterventionController::class, 'store'])->name('intervention.store');
     Route::get('/intervention/{id}/edit', [InterventionController::class, 'edit'])->name('intervention.edit');
     Route::put('/intervention/{id}/edit', [InterventionController::class, 'update'])->name('intervention.update');
+    Route::delete('/intervention/{id}', [InterventionController::class, 'destroy'])->name('intervention.destroy');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
