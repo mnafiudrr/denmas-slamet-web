@@ -38,8 +38,9 @@
                                                 {!! $intervention->content !!}
                                             </div>
                                             <div class="position-absolute end-0">
-                                                <a href="{{ route('intervention.edit', ['id' => $intervention]) }}">
+                                                <a href="{{ route('intervention.edit', ['id' => $intervention]) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                                     <i class="fa fa-edit text-md pt-1 me-3 text-primary" aria-hidden="true"></i>
+                                                    <span class="">Edit</span>
                                                 </a>
                                             </div>
                                         </div>

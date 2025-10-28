@@ -45,7 +45,7 @@
 <script>
     $(document).ready(function() {
         console.log('hello');
-        
+
     });
 </script>
 <script type="importmap">
@@ -66,13 +66,23 @@
             Paragraph,
             List,
             ListProperties,
-            Alignment
+            Alignment,
+            MediaEmbed,
+            SimpleUploadAdapter,
+            Image,
+            ImageCaption,
+            ImageResize,
+            ImageStyle,
+            ImageToolbar,
+            ImageInsert,
+            LinkImage
         } from 'ckeditor5';
 
     ClassicEditor
         .create( document.querySelector( '#content' ), {
             plugins: [
-                Essentials, Bold, Italic, Font, Paragraph, List, ListProperties, Alignment
+                Essentials, Bold, Italic, Font, Paragraph, List, ListProperties, Alignment, MediaEmbed,
+                SimpleUploadAdapter, Image, ImageToolbar, ImageCaption, ImageStyle, ImageResize, LinkImage, ImageInsert
             ],
             toolbar: {
                 items: [
@@ -85,8 +95,34 @@
                     'bulletedList', 'numberedList',
                     '|',
                     'alignment',
+                    '|',
+                    'mediaEmbed',
+                    'insertImage'
                 ]
             },
+            mediaEmbed: {
+                previewsInData: true
+            },
+            image: {
+                toolbar: [
+                    'imageStyle:block',
+                    'imageStyle:side',
+                    '|',
+                    'toggleImageCaption',
+                    'imageTextAlternative',
+                    '|',
+                    'linkImage'
+                ],
+                insert: {
+                    type: 'auto'
+                }
+            },
+            simpleUpload: {
+                uploadUrl: '{{ route('ckeditor.upload') }}',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            }
         } )
         .then( /* ... */ )
         .catch( /* ... */ );

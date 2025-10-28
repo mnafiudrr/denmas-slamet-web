@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CkeditorUploadController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrequentlyAskedQuestionController;
 use App\Http\Controllers\InterventionController;
@@ -33,7 +34,7 @@ Route::post('/delete-account', [AuthController::class, 'deleteAccountRequest'])-
 Route::group(['middleware' => 'auth', ], function() {
     Route::get('/', function() { return redirect()->route('dashboard'); })->name('root');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
     Route::post('/user/{id}/admin-status', [UserController::class, 'adminStatus'])->name('user.admin-status');
@@ -71,6 +72,8 @@ Route::group(['middleware' => 'auth', ], function() {
     Route::put('/intervention/{id}/edit', [InterventionController::class, 'update'])->name('intervention.update');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::post('/ckeditor/upload-image', [CkeditorUploadController::class, 'upload'])->name('ckeditor.upload');
 });
 
 Route::get('/test', function () {
